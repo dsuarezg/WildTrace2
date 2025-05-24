@@ -5,12 +5,14 @@ import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.library.Architectures;
 import com.tngtech.archunit.library.Architectures.LayeredArchitecture;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ZoneArchitectureTest {
 
     @Test
-    void verifyLayeredArchitecture() {
+    @DisplayName("Should verify a correct layered architecture")
+    void verifyArchitecture() {
         JavaClasses classes = new ClassFileImporter()
                 .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
                 .importPackages("org.ironhack.zone_service");
