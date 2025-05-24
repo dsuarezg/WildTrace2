@@ -16,9 +16,9 @@ public class SpeciesService {
     private final SpeciesRepository speciesRepository;
 
     /**
-     * Constructs a SpeciesService with the specified SpeciesRepository.
+     * Initializes the SpeciesService with a repository for species persistence operations.
      *
-     * @param speciesRepository the repository used for species persistence operations
+     * @param speciesRepository repository for accessing and managing species entities
      */
     public SpeciesService(SpeciesRepository speciesRepository) {
         this.speciesRepository = speciesRepository;
@@ -26,9 +26,9 @@ public class SpeciesService {
 
 
     /**
-     * Retrieves all species and returns them as a list of response DTOs.
+     * Retrieves all species records and returns them as response DTOs.
      *
-     * @return a list of SpeciesResponseDTO representing all species
+     * @return a list of SpeciesResponseDTO objects representing all species
      */
     public List<SpeciesResponseDTO> getAll() {
         return speciesRepository.findAll().stream()
@@ -36,12 +36,12 @@ public class SpeciesService {
                 .toList();
     }
 
-    /**
-     * Retrieves a species by its ID and returns it as a response DTO.
+    /****
+     * Returns the species data for the given ID as a response DTO.
      *
-     * @param id the unique identifier of the species to retrieve
+     * @param id the unique identifier of the species
      * @return the species data as a SpeciesResponseDTO
-     * @throws SpeciesNotFoundException if no species with the given ID exists
+     * @throws SpeciesNotFoundException if no species with the specified ID exists
      */
     public SpeciesResponseDTO getById(Long id) {
         Species species = speciesRepository.findById(id)
@@ -49,11 +49,11 @@ public class SpeciesService {
         return SpeciesMapper.toResponseDTO(species);
     }
 
-    /**
-     * Creates a new species from the provided request data and returns the saved species as a response DTO.
+    /****
+     * Creates and persists a new species using the provided request data, returning the saved species as a response DTO.
      *
-     * @param dto the data for the species to be created
-     * @return the saved species represented as a response DTO
+     * @param dto the request data for the species to be created
+     * @return the saved species as a response DTO
      */
     public SpeciesResponseDTO saveSpecies(SpeciesRequestDTO dto) {
         Species species = SpeciesMapper.toEntity(dto);
@@ -61,12 +61,12 @@ public class SpeciesService {
     }
 
     /**
-     * Updates an existing species with new data provided in the request DTO.
+     * Updates the details of an existing species identified by its ID.
      *
-     * @param id the ID of the species to update
-     * @param dto the request DTO containing updated species information
-     * @return the updated species as a response DTO
-     * @throws SpeciesNotFoundException if no species with the given ID exists
+     * @param id the unique identifier of the species to update
+     * @param dto the data transfer object containing updated species information
+     * @return a response DTO representing the updated species
+     * @throws SpeciesNotFoundException if a species with the specified ID does not exist
      */
     public SpeciesResponseDTO updateSpecies(Long id, SpeciesRequestDTO dto) {
         Species found = speciesRepository.findById(id)
@@ -79,10 +79,10 @@ public class SpeciesService {
     }
 
     /****
-     * Deletes the species with the specified ID.
+     * Removes the species entity with the given ID from the repository.
      *
-     * @param id the ID of the species to delete
-     * @throws SpeciesNotFoundException if no species with the given ID exists
+     * @param id the unique identifier of the species to delete
+     * @throws SpeciesNotFoundException if a species with the specified ID does not exist
      */
     public void deleteSpecies(Long id) {
         Species found = speciesRepository.findById(id)

@@ -6,11 +6,11 @@ import org.ironhack.species_service.model.Species;
 
 public class SpeciesMapper {
 
-    /**
-     * Converts a Species entity to a SpeciesResponseDTO.
+    /****
+     * Converts a Species entity into a SpeciesResponseDTO.
      *
      * @param species the Species entity to convert
-     * @return a SpeciesResponseDTO containing the species' ID, common name, scientific name, and conservation status
+     * @return a SpeciesResponseDTO populated with the species' ID, common name, scientific name, and conservation status
      */
     public static SpeciesResponseDTO toResponseDTO(Species species) {
         SpeciesResponseDTO dto = new SpeciesResponseDTO();
@@ -22,12 +22,12 @@ public class SpeciesMapper {
     }
 
     /**
-     * Creates a Species entity from a SpeciesRequestDTO.
+     * Converts a SpeciesRequestDTO to a new Species entity.
      *
-     * Copies the common name, scientific name, and conservation status from the DTO to a new Species entity.
+     * Copies the common name, scientific name, and conservation status from the DTO to the entity.
      *
-     * @param dto the data transfer object containing species information
-     * @return a new Species entity populated with data from the DTO
+     * @param dto the SpeciesRequestDTO containing species data
+     * @return a new Species entity with values from the DTO
      */
     public static Species toEntity(SpeciesRequestDTO dto) {
         Species species = new Species();

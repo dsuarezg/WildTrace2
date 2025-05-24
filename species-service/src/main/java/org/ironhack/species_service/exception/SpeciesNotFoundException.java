@@ -2,7 +2,7 @@ package org.ironhack.species_service.exception;
 
 public class SpeciesNotFoundException extends RuntimeException {
     /****
-     * Constructs a new SpeciesNotFoundException with the specified detail message.
+     * Creates a new exception indicating that a species was not found, with a custom detail message.
      *
      * @param message the detail message explaining the reason for the exception
      */
@@ -11,9 +11,9 @@ public class SpeciesNotFoundException extends RuntimeException {
     }
 
     /****
-     * Constructs a SpeciesNotFoundException with a message indicating that a species with the specified ID was not found.
+     * Creates an exception indicating that a species with the specified ID was not found.
      *
-     * @param id the ID of the species that could not be found
+     * @param id the unique identifier of the missing species
      */
     public SpeciesNotFoundException(Long id) {
         super("Species not found with ID: " + id);

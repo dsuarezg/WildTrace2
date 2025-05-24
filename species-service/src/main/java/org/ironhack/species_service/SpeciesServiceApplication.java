@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpeciesServiceApplication {
 
     /****
-     * Launches the Spring Boot application.
+     * Entry point for the Species Service Spring Boot application.
      *
      * @param args command-line arguments passed to the application
      */

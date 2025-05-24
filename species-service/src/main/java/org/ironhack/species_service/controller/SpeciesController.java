@@ -24,10 +24,10 @@ public class SpeciesController {
     @Autowired
     private SpeciesService speciesService;
 
-    /****
-     * Retrieves a list of all species.
+    /**
+     * Handles GET requests to retrieve all species.
      *
-     * @return a ResponseEntity containing a list of SpeciesResponseDTO objects with HTTP status 200
+     * @return a ResponseEntity with HTTP 200 status containing a list of all species as SpeciesResponseDTO objects
      */
     @GetMapping("")
     @Operation(summary = "Retrieve all species")
@@ -38,11 +38,11 @@ public class SpeciesController {
         return ResponseEntity.ok(speciesService.getAll());
     }
 
-    /**
-     * Retrieves a species by its unique identifier.
+    /****
+     * Handles HTTP GET requests to retrieve a species by its unique ID.
      *
-     * @param id the ID of the species to retrieve
-     * @return a ResponseEntity containing the species data if found, or a 404 status if not found
+     * @param id the unique identifier of the species
+     * @return a ResponseEntity containing the species data if found
      */
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a species by ID")
@@ -55,9 +55,9 @@ public class SpeciesController {
     }
 
     /**
-     * Creates a new species using the provided data.
+     * Handles HTTP POST requests to create a new species from the provided validated data.
      *
-     * @param dto the species data to create
+     * @param dto the validated species data to create
      * @return a ResponseEntity containing the created species and HTTP 201 status
      */
     @PostMapping("")
@@ -71,12 +71,12 @@ public class SpeciesController {
         return ResponseEntity.status(201).body(speciesService.saveSpecies(dto));
     }
 
-    /**
-     * Updates an existing species with the provided data.
+    /****
+     * Updates the details of an existing species identified by its ID.
      *
-     * @param id the ID of the species to update
-     * @param dto the updated species data
-     * @return the updated species information
+     * @param id the unique identifier of the species to update
+     * @param dto the validated data for updating the species
+     * @return a ResponseEntity containing the updated species information
      */
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing species")
@@ -90,12 +90,12 @@ public class SpeciesController {
     }
 
     /**
-     * Deletes a species by its unique identifier.
+     * Deletes a species identified by its unique ID.
      *
-     * Removes the species with the specified ID from the system. Returns HTTP 204 if deletion is successful, or HTTP 404 if the species does not exist.
+     * Removes the species with the given ID from the system. Returns HTTP 204 if the deletion is successful, or HTTP 404 if the species does not exist.
      *
      * @param id the unique identifier of the species to delete
-     * @return a response entity with HTTP 204 on success or HTTP 404 if not found
+     * @return HTTP 204 if deletion is successful; HTTP 404 if the species is not found
      */
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a species by ID")
@@ -108,11 +108,11 @@ public class SpeciesController {
         return ResponseEntity.noContent().build();
     }
 
-    /****
-     * Handles `SpeciesNotFoundException` by returning a 404 Not Found response with the exception message.
+    /**
+     * Handles cases where a species is not found by returning a 404 Not Found response with the error message.
      *
-     * @param ex the exception thrown when a species is not found
-     * @return a response entity with HTTP 404 status and the exception message as the body
+     * @param ex the exception indicating the species was not found
+     * @return a ResponseEntity containing the exception message and HTTP 404 status
      */
     @ExceptionHandler(SpeciesNotFoundException.class)
     public ResponseEntity<String> handleSpeciesNotFound(SpeciesNotFoundException ex) {
