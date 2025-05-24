@@ -8,12 +8,12 @@ public class SpeciesMapper {
 
 
     /****
-     * Converts a Species entity into a SpeciesResponseDTO.
+     * Converts a Species entity to a SpeciesResponseDTO.
      *
-     * Copies the species ID, common name, scientific name, and conservation status from the entity to the DTO.
+     * Transfers the species ID, common name, scientific name, and conservation status from the entity to the DTO.
      *
      * @param species the Species entity to convert
-     * @return a SpeciesResponseDTO populated with data from the given entity
+     * @return a SpeciesResponseDTO containing the corresponding data from the entity
      */
     public static SpeciesResponseDTO toResponseDTO(Species species) {
         SpeciesResponseDTO dto = new SpeciesResponseDTO();
@@ -25,13 +25,13 @@ public class SpeciesMapper {
     }
 
 
-    /**
-     * Converts a SpeciesRequestDTO into a new Species entity.
+    /****
+     * Creates a new Species entity from the provided SpeciesRequestDTO.
      *
-     * Copies the common name, scientific name, and conservation status from the DTO to the entity.
+     * Copies the common name, scientific name, and conservation status from the DTO to the new entity.
      *
-     * @param dto the DTO containing species data
-     * @return a new Species entity with values from the DTO
+     * @param dto the SpeciesRequestDTO containing species information
+     * @return a new Species entity populated with data from the DTO
      */
     public static Species toEntity(SpeciesRequestDTO dto) {
         Species species = new Species();
