@@ -6,6 +6,7 @@ import org.ironhack.species_service.model.Species;
 
 public class SpeciesMapper {
 
+
     /**
      * Converts a Species entity to a SpeciesResponseDTO.
      *
@@ -20,6 +21,7 @@ public class SpeciesMapper {
         dto.setConservationStatus(species.getConservationStatus());
         return dto;
     }
+
 
     /**
      * Creates a Species entity from a SpeciesRequestDTO.

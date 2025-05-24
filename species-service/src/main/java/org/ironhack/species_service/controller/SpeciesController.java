@@ -24,11 +24,15 @@ public class SpeciesController {
     @Autowired
     private SpeciesService speciesService;
 
+
     /****
      * Retrieves a list of all species.
      *
      * @return a ResponseEntity containing a list of SpeciesResponseDTO objects with HTTP status 200
      */
+
+    // GET ALL
+  
     @GetMapping("")
     @Operation(summary = "Retrieve all species")
     @ApiResponses(value = {
@@ -38,12 +42,16 @@ public class SpeciesController {
         return ResponseEntity.ok(speciesService.getAll());
     }
 
+
     /**
      * Retrieves a species by its unique identifier.
      *
      * @param id the ID of the species to retrieve
      * @return a ResponseEntity containing the species data if found, or a 404 status if not found
      */
+
+    // GET BY ID
+
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a species by ID")
     @ApiResponses(value = {
@@ -60,6 +68,9 @@ public class SpeciesController {
      * @param dto the species data to create
      * @return a ResponseEntity containing the created species and HTTP 201 status
      */
+
+    // CREATE
+
     @PostMapping("")
     @Operation(summary = "Create a new species")
     @ApiResponses(value = {
@@ -71,6 +82,7 @@ public class SpeciesController {
         return ResponseEntity.status(201).body(speciesService.saveSpecies(dto));
     }
 
+
     /**
      * Updates an existing species with the provided data.
      *
@@ -78,6 +90,9 @@ public class SpeciesController {
      * @param dto the updated species data
      * @return the updated species information
      */
+
+    // UPDATE
+
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing species")
     @ApiResponses(value = {
@@ -89,6 +104,7 @@ public class SpeciesController {
         return ResponseEntity.ok(speciesService.updateSpecies(id, dto));
     }
 
+
     /**
      * Deletes a species by its unique identifier.
      *
@@ -97,6 +113,9 @@ public class SpeciesController {
      * @param id the unique identifier of the species to delete
      * @return a response entity with HTTP 204 on success or HTTP 404 if not found
      */
+
+    // DELETE
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a species by ID")
     @ApiResponses(value = {
@@ -108,12 +127,14 @@ public class SpeciesController {
         return ResponseEntity.noContent().build();
     }
 
+
     /****
      * Handles `SpeciesNotFoundException` by returning a 404 Not Found response with the exception message.
      *
      * @param ex the exception thrown when a species is not found
      * @return a response entity with HTTP 404 status and the exception message as the body
      */
+
     @ExceptionHandler(SpeciesNotFoundException.class)
     public ResponseEntity<String> handleSpeciesNotFound(SpeciesNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());

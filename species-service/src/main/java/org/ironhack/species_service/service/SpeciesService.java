@@ -15,6 +15,7 @@ public class SpeciesService {
 
     private final SpeciesRepository speciesRepository;
 
+
     /**
      * Constructs a SpeciesService with the specified SpeciesRepository.
      *
@@ -23,6 +24,7 @@ public class SpeciesService {
     public SpeciesService(SpeciesRepository speciesRepository) {
         this.speciesRepository = speciesRepository;
     }
+
 
 
     /**
@@ -35,6 +37,7 @@ public class SpeciesService {
                 .map(SpeciesMapper::toResponseDTO)
                 .toList();
     }
+
 
     /**
      * Retrieves a species by its ID and returns it as a response DTO.
@@ -60,6 +63,7 @@ public class SpeciesService {
         return SpeciesMapper.toResponseDTO(speciesRepository.save(species));
     }
 
+
     /**
      * Updates an existing species with new data provided in the request DTO.
      *
@@ -77,6 +81,7 @@ public class SpeciesService {
 
         return SpeciesMapper.toResponseDTO(speciesRepository.save(found));
     }
+
 
     /****
      * Deletes the species with the specified ID.
