@@ -9,13 +9,13 @@ import lombok.Data;
 public class SpeciesRequestDTO {
 
     @NotBlank
-    @Schema(description = "Common name of the species", example = "Red Fox")
+    @Schema(description = "Common name of the species", example = "Lince ibérico")
     private String commonName;
 
     @NotBlank
-    @Schema(description = "Scientific name", example = "Vulpes vulpes")
+    @Schema(description = "Scientific name", example = "Lynx pardinus")
     private String scientificName;
 
-    @Schema(description = "Conservation status", example = "Least Concern")
+    @Schema(description = "Conservation status", example = "Endangered")
     private String conservationStatus;
 }
