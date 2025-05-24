@@ -1,4 +1,4 @@
-package org.ironhack.discoveryserver;
+package org.ironhack.discovery_server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
