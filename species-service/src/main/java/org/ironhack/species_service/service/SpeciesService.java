@@ -28,7 +28,7 @@ public class SpeciesService {
 
 
     /**
-     * Returns a list of all species as response DTOs.
+     * Retrieves all species and returns them as response DTOs.
      *
      * @return a list of SpeciesResponseDTO objects representing all species
      */
@@ -39,7 +39,7 @@ public class SpeciesService {
     }
 
 
-    /**
+    /****
      * Retrieves a species by its unique identifier and returns its data as a response DTO.
      *
      * @param id the unique identifier of the species
@@ -52,11 +52,11 @@ public class SpeciesService {
         return SpeciesMapper.toResponseDTO(species);
     }
 
-    /**
-     * Creates and persists a new species using the provided request data, returning the saved species as a response DTO.
+    /****
+     * Creates a new species from the provided request data and returns the saved species as a response DTO.
      *
-     * @param dto the request data for the species to create
-     * @return the saved species as a response DTO
+     * @param dto the data for the species to be created
+     * @return the persisted species represented as a response DTO
      */
     public SpeciesResponseDTO saveSpecies(SpeciesRequestDTO dto) {
         Species species = SpeciesMapper.toEntity(dto);
@@ -65,12 +65,12 @@ public class SpeciesService {
 
 
     /****
-     * Updates the details of an existing species using data from the provided request DTO.
+     * Updates an existing species with new data from the provided request DTO.
      *
      * @param id the unique identifier of the species to update
-     * @param dto the request DTO containing the new species data
+     * @param dto the request DTO containing updated species information
      * @return a response DTO representing the updated species
-     * @throws SpeciesNotFoundException if no species with the specified ID is found
+     * @throws SpeciesNotFoundException if no species with the specified ID exists
      */
     public SpeciesResponseDTO updateSpecies(Long id, SpeciesRequestDTO dto) {
         Species found = speciesRepository.findById(id)
@@ -84,11 +84,11 @@ public class SpeciesService {
 
 
     /****
-     * Removes the species entity with the specified ID from the repository.
-     *
-     * @param id the unique identifier of the species to be deleted
-     * @throws SpeciesNotFoundException if a species with the given ID does not exist
-     */
+         * Deletes the species with the specified unique identifier.
+         *
+         * @param id the unique identifier of the species to delete
+         * @throws SpeciesNotFoundException if no species with the given identifier exists
+         */
     public void deleteSpecies(Long id) {
         Species found = speciesRepository.findById(id)
                 .orElseThrow(() -> new SpeciesNotFoundException(id));

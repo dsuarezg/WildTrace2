@@ -55,12 +55,12 @@ public class SpeciesController {
      */
 
     /**
-     * Retrieves a species by its unique identifier.
+     * Handles GET requests to retrieve a species by its unique ID.
      *
-     * @param id the unique identifier of the species to retrieve
+     * @param id the unique identifier of the species
      * @return a ResponseEntity containing the species data if found
      *
-     * Returns HTTP 200 with the species data if the species exists, or triggers a 404 response if not found.
+     * Returns HTTP 200 with the species data if the species exists; otherwise, returns HTTP 404 if not found.
      */
 
     @GetMapping("/{id}")
@@ -81,13 +81,13 @@ public class SpeciesController {
      */
 
     /**
-     * Creates a new species using the provided data.
+     * Handles HTTP POST requests to create a new species.
      *
-     * Accepts a validated species request payload and returns the created species with HTTP status 201.
-     * Responds with 400 if the input data is invalid or 409 if a duplicate species exists.
+     * Accepts a validated species request payload and returns the created species data with HTTP status 201 (Created).
+     * Responds with HTTP 400 if the input data is invalid or HTTP 409 if a duplicate species exists.
      *
      * @param dto the species data to create
-     * @return the created species wrapped in a ResponseEntity with HTTP status 201
+     * @return a ResponseEntity containing the created species and HTTP status 201
      */
 
     @PostMapping("")
@@ -111,11 +111,11 @@ public class SpeciesController {
      */
 
     /**
-     * Updates an existing species with the provided data.
+     * Updates the details of an existing species by its ID.
      *
-     * @param id the ID of the species to update
-     * @param dto the validated species data for the update
-     * @return a ResponseEntity containing the updated species data and HTTP 200 status
+     * @param id the unique identifier of the species to update
+     * @param dto the new species data to apply
+     * @return a ResponseEntity containing the updated species information and HTTP 200 status
      */
 
     @PutMapping("/{id}")
@@ -142,11 +142,11 @@ public class SpeciesController {
     /****
      * Deletes a species by its unique identifier.
      *
-     * Removes the species with the specified ID from the system. Returns HTTP 204 if the deletion is successful.
-     * If the species does not exist, a 404 response is returned via exception handling.
+     * Removes the species with the given ID from the system. Returns HTTP 204 No Content if the deletion is successful.
+     * If the species does not exist, a 404 Not Found response is returned via exception handling.
      *
      * @param id the unique identifier of the species to delete
-     * @return HTTP 204 No Content if deletion is successful
+     * @return HTTP 204 No Content if the species is deleted successfully
      */
 
     @DeleteMapping("/{id}")
@@ -162,7 +162,7 @@ public class SpeciesController {
 
 
     /****
-     * Handles SpeciesNotFoundException by returning a 404 Not Found response with the exception message as the response body.
+     * Handles SpeciesNotFoundException by returning an HTTP 404 Not Found response with the exception message as the response body.
      *
      * @param ex the exception indicating that the requested species was not found
      * @return a ResponseEntity containing the exception message and HTTP 404 status
