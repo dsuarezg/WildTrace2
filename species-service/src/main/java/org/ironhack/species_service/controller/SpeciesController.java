@@ -31,7 +31,11 @@ public class SpeciesController {
      * @return a ResponseEntity containing a list of SpeciesResponseDTO objects with HTTP status 200
      */
 
-    // GET ALL
+    /****
+     * Retrieves a list of all wildlife species.
+     *
+     * @return HTTP 200 response containing a list of species data
+     */
   
     @GetMapping("")
     @Operation(summary = "Retrieve all species")
@@ -50,7 +54,14 @@ public class SpeciesController {
      * @return a ResponseEntity containing the species data if found, or a 404 status if not found
      */
 
-    // GET BY ID
+    /**
+     * Retrieves a species by its unique identifier.
+     *
+     * @param id the unique identifier of the species to retrieve
+     * @return a ResponseEntity containing the species data if found
+     *
+     * Returns HTTP 200 with the species data if the species exists, or triggers a 404 response if not found.
+     */
 
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a species by ID")
@@ -69,7 +80,15 @@ public class SpeciesController {
      * @return a ResponseEntity containing the created species and HTTP 201 status
      */
 
-    // CREATE
+    /**
+     * Creates a new species using the provided data.
+     *
+     * Accepts a validated species request payload and returns the created species with HTTP status 201.
+     * Responds with 400 if the input data is invalid or 409 if a duplicate species exists.
+     *
+     * @param dto the species data to create
+     * @return the created species wrapped in a ResponseEntity with HTTP status 201
+     */
 
     @PostMapping("")
     @Operation(summary = "Create a new species")
@@ -91,7 +110,13 @@ public class SpeciesController {
      * @return the updated species information
      */
 
-    // UPDATE
+    /**
+     * Updates an existing species with the provided data.
+     *
+     * @param id the ID of the species to update
+     * @param dto the validated species data for the update
+     * @return a ResponseEntity containing the updated species data and HTTP 200 status
+     */
 
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing species")
@@ -114,7 +139,15 @@ public class SpeciesController {
      * @return a response entity with HTTP 204 on success or HTTP 404 if not found
      */
 
-    // DELETE
+    /****
+     * Deletes a species by its unique identifier.
+     *
+     * Removes the species with the specified ID from the system. Returns HTTP 204 if the deletion is successful.
+     * If the species does not exist, a 404 response is returned via exception handling.
+     *
+     * @param id the unique identifier of the species to delete
+     * @return HTTP 204 No Content if deletion is successful
+     */
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a species by ID")
@@ -129,10 +162,10 @@ public class SpeciesController {
 
 
     /****
-     * Handles `SpeciesNotFoundException` by returning a 404 Not Found response with the exception message.
+     * Handles SpeciesNotFoundException by returning a 404 Not Found response with the exception message as the response body.
      *
-     * @param ex the exception thrown when a species is not found
-     * @return a response entity with HTTP 404 status and the exception message as the body
+     * @param ex the exception indicating that the requested species was not found
+     * @return a ResponseEntity containing the exception message and HTTP 404 status
      */
 
     @ExceptionHandler(SpeciesNotFoundException.class)
