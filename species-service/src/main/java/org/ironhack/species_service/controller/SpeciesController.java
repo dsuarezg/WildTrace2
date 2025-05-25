@@ -24,17 +24,10 @@ public class SpeciesController {
     @Autowired
     private SpeciesService speciesService;
 
-
     /****
      * Retrieves a list of all species.
      *
      * @return a ResponseEntity containing a list of SpeciesResponseDTO objects with HTTP status 200
-     */
-
-    /****
-     * Retrieves a list of all wildlife species.
-     *
-     * @return HTTP 200 response containing a list of species data
      */
   
     @GetMapping("")
@@ -47,12 +40,6 @@ public class SpeciesController {
     }
 
 
-    /**
-     * Retrieves a species by its unique identifier.
-     *
-     * @param id the ID of the species to retrieve
-     * @return a ResponseEntity containing the species data if found, or a 404 status if not found
-     */
 
     /**
      * Handles GET requests to retrieve a species by its unique ID.
@@ -73,12 +60,6 @@ public class SpeciesController {
         return ResponseEntity.ok(speciesService.getById(id));
     }
 
-    /**
-     * Creates a new species using the provided data.
-     *
-     * @param dto the species data to create
-     * @return a ResponseEntity containing the created species and HTTP 201 status
-     */
 
     /**
      * Handles HTTP POST requests to create a new species.
@@ -103,14 +84,6 @@ public class SpeciesController {
 
 
     /**
-     * Updates an existing species with the provided data.
-     *
-     * @param id the ID of the species to update
-     * @param dto the updated species data
-     * @return the updated species information
-     */
-
-    /**
      * Updates the details of an existing species by its ID.
      *
      * @param id the unique identifier of the species to update
@@ -130,14 +103,6 @@ public class SpeciesController {
     }
 
 
-    /**
-     * Deletes a species by its unique identifier.
-     *
-     * Removes the species with the specified ID from the system. Returns HTTP 204 if deletion is successful, or HTTP 404 if the species does not exist.
-     *
-     * @param id the unique identifier of the species to delete
-     * @return a response entity with HTTP 204 on success or HTTP 404 if not found
-     */
 
     /****
      * Deletes a species by its unique identifier.

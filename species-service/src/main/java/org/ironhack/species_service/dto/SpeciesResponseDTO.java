@@ -17,6 +17,5 @@ public class SpeciesResponseDTO {
     private String scientificName;
 
     @Schema(description = "Conservation status", example = "Endangered")
-
     private String conservationStatus;
 }

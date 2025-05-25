@@ -15,6 +15,7 @@ public class SpeciesMapper {
      * @param species the Species entity to convert
      * @return a SpeciesResponseDTO containing the corresponding data from the entity
      */
+
     public static SpeciesResponseDTO toResponseDTO(Species species) {
         SpeciesResponseDTO dto = new SpeciesResponseDTO();
         dto.setId(species.getSpeciesId());
@@ -33,6 +34,7 @@ public class SpeciesMapper {
      * @param dto the SpeciesRequestDTO containing species information
      * @return a new Species entity populated with data from the DTO
      */
+
     public static Species toEntity(SpeciesRequestDTO dto) {
         Species species = new Species();
         species.setCommonName(dto.getCommonName());
