@@ -5,14 +5,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.6</version>
+        <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.ironhack</groupId>
-    <artifactId>species-service</artifactId>
+    <artifactId>sighting-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>species-service</name>
-    <description>species-service</description>
+    <name>sighting-service</name>
+    <description>sighting-service</description>
     <url/>
     <licenses>
         <license/>
@@ -53,7 +53,7 @@
             <artifactId>jakarta.el-api</artifactId>
             <version>6.0.1</version>
         </dependency>
-        <dependency>n
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -77,6 +77,10 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

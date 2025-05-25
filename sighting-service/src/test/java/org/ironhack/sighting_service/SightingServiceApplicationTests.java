@@ -1,10 +1,10 @@
-package org.ironhack.discoveryserver;
+package org.ironhack.sighting_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DiscoveryServerApplicationTests {
+class SightingServiceApplicationTests {
 
     @Test
     void contextLoads() {
