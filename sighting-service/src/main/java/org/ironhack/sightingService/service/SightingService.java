@@ -85,6 +85,21 @@ public class SightingService {
         return SightingMapper.toResponseDTO(sightingRepository.save(sighting));
     }
 
+    public SightingResponseDTO update(Long id, SightingRequestDTO dto) {
+        Sighting existing = sightingRepository.findById(id)
+                .orElseThrow(() -> new SightingNotFoundException(id));
+
+        existing.setZoneId(dto.getZoneId());
+        existing.setSpeciesId(dto.getSpeciesId());
+        existing.setDate(dto.getDate());
+        existing.setObservedBy(dto.getObservedBy());
+        existing.setMethod(dto.getMethod());
+        existing.setNotes(dto.getNotes());
+
+        return SightingMapper.toResponseDTO(sightingRepository.save(existing));
+    }
+
+
     /**
      * Deletes a sighting by ID.
      *

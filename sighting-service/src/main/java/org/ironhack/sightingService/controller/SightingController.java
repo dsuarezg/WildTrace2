@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 
 import org.ironhack.sightingService.dto.SightingRequestDTO;
 import org.ironhack.sightingService.dto.SightingResponseDTO;
+import org.ironhack.sightingService.exception.SightingNotFoundException;
 import org.ironhack.sightingService.exception.SpeciesNotFoundException;
 import org.ironhack.sightingService.exception.ZoneNotFoundException;
 import org.ironhack.sightingService.service.SightingService;
@@ -75,6 +76,19 @@ public class SightingController {
         return ResponseEntity.status(201).body(sightingService.save(dto));
     }
 
+    @PutMapping("/{id}")
+    @Operation(summary = "Update a sighting")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Sighting updated successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid update data"),
+            @ApiResponse(responseCode = "404", description = "Sighting not found")
+    })
+    public ResponseEntity<SightingResponseDTO> updateSighting(@PathVariable Long id,
+                                                              @RequestBody @Valid SightingRequestDTO dto) {
+        return ResponseEntity.ok(sightingService.update(id, dto));
+    }
+
+
     /**
      * Deletes a sighting by its unique identifier.
      *
@@ -92,6 +106,8 @@ public class SightingController {
         return ResponseEntity.noContent().build();
     }
 
+
+    // Global handler for exceptions not allowed, incompatible with Swagger
     @ExceptionHandler(ZoneNotFoundException.class)
     public ResponseEntity<String> handleSpeciesNotFound(ZoneNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
@@ -99,6 +115,11 @@ public class SightingController {
 
     @ExceptionHandler(SpeciesNotFoundException.class)
     public ResponseEntity<String> handleSpeciesNotFound(SpeciesNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(SightingNotFoundException.class)
+    public ResponseEntity<String> handleSpeciesNotFound(SightingNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }

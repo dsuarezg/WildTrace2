@@ -21,7 +21,7 @@ public class SightingNotFoundException extends RuntimeException {
      */
 
     public SightingNotFoundException(Long id) {
-        super("Species not found with ID: " + id);
+        super("Sighting not found with ID: " + id);
     }
 
 }
