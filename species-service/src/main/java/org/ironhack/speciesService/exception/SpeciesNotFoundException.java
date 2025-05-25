@@ -4,9 +4,9 @@ public class SpeciesNotFoundException extends RuntimeException {
 
 
     /**
-     * Creates an exception indicating that a species was not found, with a custom detail message.
+     * Constructs a SpeciesNotFoundException with a custom detail message.
      *
-     * @param message the detail message for the exception
+     * @param message the detail message explaining the exception
      */
 
     public SpeciesNotFoundException(String message) {
@@ -15,10 +15,10 @@ public class SpeciesNotFoundException extends RuntimeException {
 
 
     /****
-     * Creates an exception for a missing species with the given ID.
-     *
-     * @param id the ID of the species that was not found
-     */
+         * Constructs a SpeciesNotFoundException with a message indicating that a species with the specified ID was not found.
+         *
+         * @param id the unique identifier of the missing species
+         */
 
     public SpeciesNotFoundException(Long id) {
         super("Species not found with ID: " + id);
