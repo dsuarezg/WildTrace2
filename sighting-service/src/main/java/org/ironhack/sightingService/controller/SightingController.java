@@ -25,14 +25,19 @@ public class SightingController {
 
     private final SightingService sightingService;
 
+    /****
+     * Constructs a SightingController with the specified SightingService.
+     *
+     * @param sightingService the service used to manage sighting operations
+     */
     public SightingController(SightingService sightingService) {
         this.sightingService = sightingService;
     }
 
     /**
-     * Retrieves a list of all recorded sightings.
+     * Returns a list of all species sightings.
      *
-     * @return a ResponseEntity with HTTP 200 and a list of SightingResponseDTO objects
+     * @return a ResponseEntity containing HTTP 200 and a list of SightingResponseDTO objects representing all recorded sightings
      */
     @GetMapping("")
     @Operation(summary = "Retrieve all sightings")
@@ -43,11 +48,11 @@ public class SightingController {
         return ResponseEntity.ok(sightingService.getAll());
     }
 
-    /**
-     * Retrieves a sighting record by its unique ID.
+    /****
+     * Returns the sighting record with the specified ID.
      *
      * @param id the unique identifier of the sighting
-     * @return a ResponseEntity with the sighting data or HTTP 404 if not found
+     * @return a ResponseEntity containing the sighting data if found; otherwise, HTTP 404 if the sighting does not exist
      */
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a sighting by ID")
@@ -59,11 +64,13 @@ public class SightingController {
         return ResponseEntity.ok(sightingService.getById(id));
     }
 
-    /**
-     * Creates a new sighting record based on the provided data.
+    /****
+     * Handles HTTP POST requests to create a new species sighting.
      *
-     * @param dto the sighting data to create
-     * @return a ResponseEntity with the created sighting and HTTP 201 status
+     * Accepts a validated sighting request and returns the created sighting with HTTP 201 status.
+     *
+     * @param dto the validated sighting data to create
+     * @return ResponseEntity containing the created sighting and HTTP 201 status
      */
     @PostMapping("")
     @Operation(summary = "Create a new sighting")
@@ -76,6 +83,13 @@ public class SightingController {
         return ResponseEntity.status(201).body(sightingService.save(dto));
     }
 
+    /**
+     * Updates an existing sighting with the specified ID using the provided data.
+     *
+     * @param id the ID of the sighting to update
+     * @param dto the validated data for updating the sighting
+     * @return the updated sighting as a response entity
+     */
     @PutMapping("/{id}")
     @Operation(summary = "Update a sighting")
     @ApiResponses(value = {
@@ -89,11 +103,12 @@ public class SightingController {
     }
 
 
-    /**
-     * Deletes a sighting by its unique identifier.
+    /****
+     * Deletes the sighting with the specified ID.
+     *
+     * Returns HTTP 204 No Content if the sighting is successfully deleted, or HTTP 404 if the sighting does not exist.
      *
      * @param id the unique identifier of the sighting to delete
-     * @return HTTP 204 No Content if the deletion is successful
      */
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a sighting by ID")
@@ -107,17 +122,34 @@ public class SightingController {
     }
 
 
-    // Global handler for exceptions not allowed, incompatible with Swagger
+    /**
+     * Handles ZoneNotFoundException by returning a 404 Not Found response with the exception message.
+     *
+     * @param ex the exception indicating the requested zone was not found
+     * @return a ResponseEntity containing the error message and HTTP 404 status
+     */
     @ExceptionHandler(ZoneNotFoundException.class)
     public ResponseEntity<String> handleSpeciesNotFound(ZoneNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
+    /**
+     * Handles cases where a requested species is not found by returning a 404 Not Found response with the exception message.
+     *
+     * @param ex the exception indicating the species was not found
+     * @return a response entity with HTTP 404 status and the exception message as the body
+     */
     @ExceptionHandler(SpeciesNotFoundException.class)
     public ResponseEntity<String> handleSpeciesNotFound(SpeciesNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
+    /**
+     * Handles SightingNotFoundException by returning a 404 Not Found response with the exception message.
+     *
+     * @param ex the exception indicating the sighting was not found
+     * @return a ResponseEntity containing the error message and HTTP 404 status
+     */
     @ExceptionHandler(SightingNotFoundException.class)
     public ResponseEntity<String> handleSpeciesNotFound(SightingNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());

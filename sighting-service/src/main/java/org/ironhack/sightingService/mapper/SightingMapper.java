@@ -7,6 +7,12 @@ import org.ironhack.sightingService.model.Sighting;
 
 public class SightingMapper {
 
+    /**
+     * Converts a SightingRequestDTO into a Sighting entity by copying all relevant fields.
+     *
+     * @param dto the data transfer object containing sighting information
+     * @return a Sighting entity populated with data from the DTO
+     */
     public static Sighting toEntity(SightingRequestDTO dto) {
         Sighting entity = new Sighting();
         entity.setZoneId(dto.getZoneId());
@@ -18,6 +24,12 @@ public class SightingMapper {
         return entity;
     }
 
+    /**
+     * Converts a Sighting entity to a SightingResponseDTO.
+     *
+     * @param entity the Sighting entity to convert
+     * @return a SightingResponseDTO populated with data from the entity
+     */
     public static SightingResponseDTO toResponseDTO(Sighting entity) {
         SightingResponseDTO dto = new SightingResponseDTO();
         dto.setId(entity.getId());

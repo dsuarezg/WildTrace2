@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "zone-service")
 public interface ZoneServiceClient {
 
+    /****
+     * Retrieves zone details for the specified zone ID from the zone service.
+     *
+     * @param id the unique identifier of the zone to retrieve
+     * @return a ZoneResponseDTO containing the zone's information
+     */
     @GetMapping("/api/zones/{id}")
     ZoneResponseDTO getZoneById(@PathVariable Long id);
 }
