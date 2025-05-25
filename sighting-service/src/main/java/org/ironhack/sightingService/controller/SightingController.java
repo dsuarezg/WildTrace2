@@ -26,18 +26,18 @@ public class SightingController {
     private final SightingService sightingService;
 
     /****
-     * Constructs a SightingController with the specified SightingService.
+     * Initializes the SightingController with the provided SightingService.
      *
-     * @param sightingService the service used to manage sighting operations
+     * @param sightingService service responsible for handling sighting-related operations
      */
     public SightingController(SightingService sightingService) {
         this.sightingService = sightingService;
     }
 
     /**
-     * Returns a list of all species sightings.
+     * Retrieves all recorded species sightings.
      *
-     * @return a ResponseEntity containing HTTP 200 and a list of SightingResponseDTO objects representing all recorded sightings
+     * @return a ResponseEntity with HTTP 200 status containing a list of SightingResponseDTO objects for all sightings
      */
     @GetMapping("")
     @Operation(summary = "Retrieve all sightings")
@@ -49,10 +49,10 @@ public class SightingController {
     }
 
     /****
-     * Returns the sighting record with the specified ID.
+     * Retrieves a sighting by its unique identifier.
      *
-     * @param id the unique identifier of the sighting
-     * @return a ResponseEntity containing the sighting data if found; otherwise, HTTP 404 if the sighting does not exist
+     * @param id the ID of the sighting to retrieve
+     * @return a ResponseEntity containing the sighting data if found, or HTTP 404 if not found
      */
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a sighting by ID")
@@ -65,11 +65,12 @@ public class SightingController {
     }
 
     /****
-     * Handles HTTP POST requests to create a new species sighting.
+     * Creates a new species sighting from the provided request data.
      *
      * Accepts a validated sighting request and returns the created sighting with HTTP 201 status.
+     * Returns HTTP 400 if the input data is invalid, or HTTP 404 if the referenced species or zone does not exist.
      *
-     * @param dto the validated sighting data to create
+     * @param dto the validated sighting request data
      * @return ResponseEntity containing the created sighting and HTTP 201 status
      */
     @PostMapping("")
@@ -84,11 +85,13 @@ public class SightingController {
     }
 
     /**
-     * Updates an existing sighting with the specified ID using the provided data.
+     * Updates the sighting with the given ID using the provided data.
      *
-     * @param id the ID of the sighting to update
-     * @param dto the validated data for updating the sighting
-     * @return the updated sighting as a response entity
+     * @param id the unique identifier of the sighting to update
+     * @param dto the validated request data for the update
+     * @return a response entity containing the updated sighting
+     *
+     * Returns HTTP 200 with the updated sighting if successful, HTTP 400 for invalid data, or HTTP 404 if the sighting does not exist.
      */
     @PutMapping("/{id}")
     @Operation(summary = "Update a sighting")
@@ -104,9 +107,9 @@ public class SightingController {
 
 
     /****
-     * Deletes the sighting with the specified ID.
+     * Deletes a sighting by its unique identifier.
      *
-     * Returns HTTP 204 No Content if the sighting is successfully deleted, or HTTP 404 if the sighting does not exist.
+     * Returns HTTP 204 No Content if the sighting is deleted successfully, or HTTP 404 if the sighting does not exist.
      *
      * @param id the unique identifier of the sighting to delete
      */
@@ -123,10 +126,10 @@ public class SightingController {
 
 
     /**
-     * Handles ZoneNotFoundException by returning a 404 Not Found response with the exception message.
+     * Handles requests where a zone is not found by returning a 404 Not Found response with the error message.
      *
      * @param ex the exception indicating the requested zone was not found
-     * @return a ResponseEntity containing the error message and HTTP 404 status
+     * @return a ResponseEntity with the exception message and HTTP 404 status
      */
     @ExceptionHandler(ZoneNotFoundException.class)
     public ResponseEntity<String> handleSpeciesNotFound(ZoneNotFoundException ex) {
@@ -134,10 +137,10 @@ public class SightingController {
     }
 
     /**
-     * Handles cases where a requested species is not found by returning a 404 Not Found response with the exception message.
+     * Handles SpeciesNotFoundException by returning a 404 Not Found response with the exception message.
      *
-     * @param ex the exception indicating the species was not found
-     * @return a response entity with HTTP 404 status and the exception message as the body
+     * @param ex the SpeciesNotFoundException thrown when a requested species does not exist
+     * @return ResponseEntity containing the exception message and HTTP 404 status
      */
     @ExceptionHandler(SpeciesNotFoundException.class)
     public ResponseEntity<String> handleSpeciesNotFound(SpeciesNotFoundException ex) {
@@ -145,10 +148,10 @@ public class SightingController {
     }
 
     /**
-     * Handles SightingNotFoundException by returning a 404 Not Found response with the exception message.
+     * Handles SightingNotFoundException by returning an HTTP 404 response with the error message.
      *
-     * @param ex the exception indicating the sighting was not found
-     * @return a ResponseEntity containing the error message and HTTP 404 status
+     * @param ex the exception indicating that the requested sighting was not found
+     * @return a ResponseEntity with the exception message and HTTP 404 status
      */
     @ExceptionHandler(SightingNotFoundException.class)
     public ResponseEntity<String> handleSpeciesNotFound(SightingNotFoundException ex) {

@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface ZoneServiceClient {
 
     /****
-     * Retrieves zone details for the specified zone ID from the zone service.
+     * Retrieves the details of a zone by its unique identifier.
      *
-     * @param id the unique identifier of the zone to retrieve
-     * @return a ZoneResponseDTO containing the zone's information
+     * @param id the unique identifier of the zone
+     * @return the details of the specified zone
      */
     @GetMapping("/api/zones/{id}")
     ZoneResponseDTO getZoneById(@PathVariable Long id);
