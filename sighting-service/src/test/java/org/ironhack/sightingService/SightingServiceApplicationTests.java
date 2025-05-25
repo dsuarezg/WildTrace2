@@ -1,4 +1,4 @@
-package org.ironhack.sighting_service;
+package org.ironhack.sightingService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
