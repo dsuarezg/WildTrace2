@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Formulario</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+<header>
+    <h1 th:text="${title}">Formulario</h1>
+    <a href="/" style="float:right;">Inicio</a>
+</header>
+
+<main>
+    <form th:action="@{${formAction}}" th:object="${species}" method="post">
+        <input type="hidden" th:if="${species.speciesId}" name="_method" value="put"/>
+        <label>Nombre común:</label>
+        <input type="text" th:field="*{commonName}" required/>
+
+        <label>Nombre científico:</label>
+        <input type="text" th:field="*{scientificName}" required/>
+
+        <label>Estado de conservación:</label>
+        <input type="text" th:field="*{conservationStatus}" required/>
+
+        <button type="submit">Guardar</button>
+    </form>
+</main>
+<footer>
+    <p>WildTrace © 2025</p>
+</footer>
+</body>
+</html>

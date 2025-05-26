@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WildTrace Frontend</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+<header>
+    <h1>🐾 WildTrace – Frontend</h1>
+    <p>Gestión de biodiversidad en zonas naturalizadas</p>
+</header>
+
+<main>
+    <h2>Explora</h2>
+    <ul>
+        <li><a th:href="@{/species}">📘 Catálogo de Especies</a></li>
+        <li><a th:href="@{/zones}">🗺️ Zonas Naturalizadas</a></li>
+        <li><a th:href="@{/sightings}">🔭 Avistamientos</a></li>
+    </ul>
+</main>
+
+<footer>
+    <p>Desarrollado como parte del proyecto <strong>WildTrace</strong> 🐦</p>
+</footer>
+</body>
+</html>
