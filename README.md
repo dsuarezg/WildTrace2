@@ -157,3 +157,7 @@ Todos los servicios cuentan con:
 - [ ] Enriquecer respuestas con datos relacionados (DTOs anidados)
 - [ ] Exponer métricas o estadísticas (frecuencia, zonas calientes)
 - [ ] Refactor hacia arquitectura hexagonal (por puertos y adaptadores)# WildTrace
+
+---
+
+Desarrollado por Daniel Suárez con ❤️ para **WildTrace**

@@ -107,7 +107,7 @@ http://localhost:8083/swagger-ui/index.html
 ## Tecnologías utilizadas
 
 - Java 21
-- Spring Boot 3.4.x
+- Spring Boot 3.4.6
 - Spring Data JPA
 - Spring Cloud OpenFeign
 - Eureka Discovery Client
@@ -175,3 +175,7 @@ Incluye:
 - [ ] Enriquecer la respuesta con info extendida (especie/zona en lugar de solo ID)
 - [ ] Implementar caché para validaciones de especie/zona
 - [ ] Exponer estadísticas básicas: especies más vistas, zonas con más avistamientos
+
+---
+
+Desarrollado con ❤️ para **WildTrace**

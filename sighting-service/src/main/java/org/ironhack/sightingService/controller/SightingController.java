@@ -66,7 +66,6 @@ public class SightingController {
 
     /****
      * Creates a new species sighting from the provided request data.
-     *
      * Accepts a validated sighting request and returns the created sighting with HTTP 201 status.
      * Returns HTTP 400 if the input data is invalid, or HTTP 404 if the referenced species or zone does not exist.
      *
@@ -108,7 +107,6 @@ public class SightingController {
 
     /****
      * Deletes a sighting by its unique identifier.
-     *
      * Returns HTTP 204 No Content if the sighting is deleted successfully, or HTTP 404 if the sighting does not exist.
      *
      * @param id the unique identifier of the sighting to delete
@@ -132,7 +130,7 @@ public class SightingController {
      * @return a ResponseEntity with the exception message and HTTP 404 status
      */
     @ExceptionHandler(ZoneNotFoundException.class)
-    public ResponseEntity<String> handleSpeciesNotFound(ZoneNotFoundException ex) {
+    public ResponseEntity<String> handleZoneNotFound(ZoneNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
@@ -154,7 +152,7 @@ public class SightingController {
      * @return a ResponseEntity with the exception message and HTTP 404 status
      */
     @ExceptionHandler(SightingNotFoundException.class)
-    public ResponseEntity<String> handleSpeciesNotFound(SightingNotFoundException ex) {
+    public ResponseEntity<String> handleSightingNotFound(SightingNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }

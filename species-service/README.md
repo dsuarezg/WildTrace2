@@ -89,7 +89,7 @@ http://localhost:8081/swagger-ui/index.html
 ## Tecnologías utilizadas
 
 - Java 21
-- Spring Boot 3.4.x
+- Spring Boot 3.4.6
 - Spring Data JPA
 - MySQL / MariaDB
 - Maven
@@ -150,3 +150,5 @@ species-service/target/site/jacoco/index.html
 - [ ] Sincronización con base de datos externa de especies
 
 ---
+
+Desarrollado con ❤️ para **WildTrace**
