@@ -3,18 +3,18 @@ package org.ironhack.sightingService.exception;
 public class ZoneNotFoundException extends RuntimeException {
 
     /**
-     * Constructs a ZoneNotFoundException with a message indicating that a zone with the specified ID was not found.
+     * Creates an exception indicating that a zone with the specified ID was not found.
      *
-     * @param id the ID of the zone that could not be found
+     * @param id the identifier of the missing zone
      */
     public ZoneNotFoundException(Long id) {
         super("Zone with ID " + id + " was not found");
     }
 
     /**
-     * Constructs a new ZoneNotFoundException with the specified detail message.
+     * Creates a ZoneNotFoundException with a custom detail message.
      *
-     * @param message the detail message explaining the reason for the exception
+     * @param message the detail message describing the exception
      */
     public ZoneNotFoundException(String message) {
         super(message);

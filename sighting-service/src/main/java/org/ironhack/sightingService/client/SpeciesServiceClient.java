@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface SpeciesServiceClient {
 
     /****
-     * Retrieves species information by its unique identifier from the species service.
+     * Retrieves species data from the species service by its unique identifier.
      *
      * @param id the unique identifier of the species
-     * @return a SpeciesResponseDTO containing the species data
+     * @return the species data as a SpeciesResponseDTO
      */
     @GetMapping("/api/species/{id}")
     SpeciesResponseDTO getSpeciesById(@PathVariable Long id);

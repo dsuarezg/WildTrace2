@@ -21,8 +21,8 @@ public class SightingService {
     private final SpeciesServiceClient speciesServiceClient;
     private final ZoneServiceClient zoneServiceClient;
 
-    /****
-     * Constructs a SightingService with the required repository and external service clients.
+    /**
+     * Initializes the SightingService with the specified repository and external service clients for species and zones.
      */
     public SightingService(SightingRepository sightingRepository,
                            SpeciesServiceClient speciesServiceClient,
@@ -33,9 +33,9 @@ public class SightingService {
     }
 
     /**
-     * Returns a list of all recorded sightings as response DTOs.
+     * Retrieves all recorded sightings and returns them as response DTOs.
      *
-     * @return a list of SightingResponseDTO objects representing all sightings
+     * @return a list of SightingResponseDTO objects for each sighting
      */
     public List<SightingResponseDTO> getAll() {
         return sightingRepository.findAll().stream()
@@ -44,11 +44,11 @@ public class SightingService {
     }
 
     /****
-     * Returns the sighting with the specified ID.
+     * Retrieves a sighting by its unique identifier.
      *
      * @param id the unique identifier of the sighting
-     * @return the corresponding SightingResponseDTO
-     * @throws SightingNotFoundException if no sighting with the given ID exists
+     * @return the sighting as a SightingResponseDTO
+     * @throws SightingNotFoundException if no sighting with the specified ID exists
      */
     public SightingResponseDTO getById(Long id) {
         Sighting sighting = sightingRepository.findById(id)
@@ -57,12 +57,12 @@ public class SightingService {
     }
 
     /**
-     * Creates and persists a new sighting after verifying the existence of the specified species and zone.
+     * Saves a new sighting after validating the existence of the specified species and zone.
      *
-     * @param dto the sighting data to be saved
-     * @return the persisted sighting as a response DTO
-     * @throws SpeciesNotFoundException if the provided species ID does not exist
-     * @throws ZoneNotFoundException if the provided zone ID does not exist
+     * @param dto the sighting request data
+     * @return the saved sighting as a response DTO
+     * @throws SpeciesNotFoundException if the species ID does not exist
+     * @throws ZoneNotFoundException if the zone ID does not exist
      */
     public SightingResponseDTO save(SightingRequestDTO dto) {
         try {
@@ -82,12 +82,12 @@ public class SightingService {
     }
 
     /**
-     * Updates an existing sighting with new data.
+     * Updates the details of an existing sighting with new information.
      *
-     * @param id the ID of the sighting to update
-     * @param dto the new data for the sighting
-     * @return the updated sighting as a response DTO
-     * @throws SightingNotFoundException if no sighting with the given ID exists
+     * @param id the unique identifier of the sighting to update
+     * @param dto the data containing updated sighting information
+     * @return a response DTO representing the updated sighting
+     * @throws SightingNotFoundException if a sighting with the specified ID does not exist
      */
     public SightingResponseDTO update(Long id, SightingRequestDTO dto) {
         Sighting existing = sightingRepository.findById(id)
@@ -105,10 +105,10 @@ public class SightingService {
 
 
     /**
-     * Removes a sighting with the specified ID.
+     * Deletes the sighting with the specified ID.
      *
-     * @param id the unique identifier of the sighting to delete
-     * @throws SightingNotFoundException if no sighting with the given ID exists
+     * @param id the ID of the sighting to delete
+     * @throws SightingNotFoundException if a sighting with the given ID does not exist
      */
     public void delete(Long id) {
         Sighting sighting = sightingRepository.findById(id)
