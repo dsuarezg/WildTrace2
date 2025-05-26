@@ -8,12 +8,12 @@ import org.ironhack.sightingService.model.Sighting;
 public class SightingMapper {
 
     /**
-     * Creates a Sighting entity from the provided SightingRequestDTO.
+     * Converts a SightingRequestDTO to a new Sighting entity.
      *
-     * Copies zone ID, species ID, date, observer, method, and notes from the DTO to a new Sighting entity.
+     * Copies zone ID, species ID, date, observer, method, and notes from the DTO to the entity.
      *
-     * @param dto the SightingRequestDTO containing sighting details
-     * @return a new Sighting entity populated with data from the DTO
+     * @param dto the SightingRequestDTO containing sighting information
+     * @return a Sighting entity populated with data from the DTO
      */
     public static Sighting toEntity(SightingRequestDTO dto) {
         Sighting entity = new Sighting();
@@ -27,10 +27,10 @@ public class SightingMapper {
     }
 
     /**
-     * Creates a SightingResponseDTO populated with data from the given Sighting entity.
+     * Converts a Sighting entity to a SightingResponseDTO by copying its details.
      *
      * @param entity the Sighting entity to convert
-     * @return a SightingResponseDTO containing the entity's details
+     * @return a SightingResponseDTO with the ID, zone ID, species ID, date, observer, method, and notes from the entity
      */
     public static SightingResponseDTO toResponseDTO(Sighting entity) {
         SightingResponseDTO dto = new SightingResponseDTO();

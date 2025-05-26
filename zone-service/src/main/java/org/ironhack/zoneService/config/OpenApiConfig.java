@@ -17,6 +17,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 )
 public class OpenApiConfig {
 
+        /****
+         * Configures CORS settings for the OpenAPI documentation endpoints.
+         *
+         * Allows cross-origin GET requests from http://localhost:8080 to paths matching /v3/api-docs/**.
+         *
+         * @return a WebMvcConfigurer with CORS mappings for the OpenAPI docs endpoints
+         */
         @Bean
         public WebMvcConfigurer corsConfigurer() {
                 return new WebMvcConfigurer() {

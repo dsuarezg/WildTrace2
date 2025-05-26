@@ -4,9 +4,9 @@ public class SightingNotFoundException extends RuntimeException {
 
 
     /**
-     * Creates a SightingNotFoundException with a custom detail message.
+     * Constructs a SightingNotFoundException with a custom error message.
      *
-     * @param message the detail message describing why the sighting was not found
+     * @param message the detail message explaining why the sighting was not found
      */
 
     public SightingNotFoundException(String message) {
@@ -15,9 +15,9 @@ public class SightingNotFoundException extends RuntimeException {
 
 
     /**
-     * Creates a SightingNotFoundException for a missing sighting with the specified ID.
+     * Constructs a SightingNotFoundException indicating that a sighting with the specified ID was not found.
      *
-     * @param id the unique identifier of the sighting that was not found
+     * @param id the unique identifier of the missing sighting
      */
 
     public SightingNotFoundException(Long id) {
