@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Configuration;
 public class GatewayConfig {
 
     /**
-     * Defines custom routing rules for the API gateway, mapping specific path patterns to corresponding microservices.
+     * Configures routing rules for the API gateway, directing requests to appropriate microservices based on path patterns.
      *
-     * Requests to `/api/species/**`, `/api/zone/**`, and `/api/sighting/**` are routed to the `species-service`, `zone-service`, and `sighting-service` respectively using load balancing.
+     * Routes requests matching `/api/species/**`, `/api/zone/**`, and `/api/sighting/**` to their respective services via load balancing. All other requests are forwarded to the `frontend-service`.
      *
-     * @return a RouteLocator with the configured routes for species, zone, and sighting services
+     * @return a RouteLocator with the configured routing rules
      */
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
