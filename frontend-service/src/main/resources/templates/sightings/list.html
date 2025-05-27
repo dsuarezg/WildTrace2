@@ -1,20 +1,17 @@
-<!--
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>🔭 Avistamientos - WildTrace</title>
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <title>🔭 Avistamientos</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-
 <header>
     <h1>🔭 Avistamientos de Fauna</h1>
-    <a href="/" style="float:right;">← Volver al inicio</a>
+    <a href="/">Inicio</a>
 </header>
-
 <main>
-    <a href="/sightings/new" style="background-color: green; color: white; padding: 0.5rem;">➕ Añadir Avistamiento</a>
+    <a href="/sightings/new" class="btn-create">➕ Nuevo avistamiento</a>
     <table>
         <thead>
         <tr>
@@ -29,73 +26,24 @@
         </thead>
         <tbody>
         <tr th:each="s : ${sightingList}">
-            <td th:text="${s.zoneId}">Zona</td>
-            <td th:text="${s.speciesId}">Especie</td>
-            <td th:text="${s.date}">Fecha</td>
-            <td th:text="${s.observedBy}">Observador</td>
-            <td th:text="${s.method}">Método</td>
-            <td th:text="${s.notes}">Notas</td>
-            <td>
-                <a th:href="@{'/sightings/edit/' + ${s.id}}" style="background-color: orange; color: white; padding: 0.3rem;">✏️ Editar</a>
-                <form th:action="@{'/sightings/delete/' + ${s.id}}" method="post" style="display:inline;">
-                    <button type="submit" style="background-color: crimson; color: white;">🗑️ Borrar</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</main>
-
-<footer>
-    <p>WildTrace © 2025</p>
-</footer>
-</body>
-</html>
--->
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>🔭 Avistamientos - WildTrace</title>
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-</head>
-<body>
-<header>
-    <h1>🔭 Avistamientos</h1>
-    <a href="/" style="float:right;">← Volver</a>
-</header>
-
-<main>
-    <a href="/sightings/new">➕ Nuevo Avistamiento</a>
-    <table>
-        <thead>
-        <tr>
-            <th>Zona</th>
-            <th>Especie</th>
-            <th>Fecha</th>
-            <th>Observador</th>
-            <th>Método</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="s : ${sightingList}">
             <td th:text="${zoneMap[s.zoneId]}">Zona</td>
             <td th:text="${speciesMap[s.speciesId]}">Especie</td>
             <td th:text="${s.date}">Fecha</td>
             <td th:text="${s.observedBy}">Observador</td>
             <td th:text="${s.method}">Método</td>
-            <td>
-                <form th:action="@{'/sightings/edit/' + ${s.id}}" method="get" style="display:inline;">
-                    <button>✏️</button>
-                </form>
-                <form th:action="@{'/sightings/delete/' + ${s.id}}" method="post" style="display:inline;">
-                    <button style="color: red;">🗑️</button>
+            <td th:text="${s.notes}">Notas</td>
+            <td class="actions">
+                <a th:href="@{'/sightings/edit/' + ${s.id}}" class="btn-action btn-edit">✏️</a>
+                <form th:action="@{'/sightings/delete/' + ${s.id}}" method="post">
+                    <button type="submit" class="btn-delete">🗑️</button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
 </main>
+<footer>
+    <p>WildTrace 🐦 2025</p>
+</footer>
 </body>
 </html>
