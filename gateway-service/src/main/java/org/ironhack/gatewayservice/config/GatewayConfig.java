@@ -24,6 +24,9 @@ public class GatewayConfig {
                         .uri("lb://zone-service"))
                 .route("sighting", r -> r.path("/api/sighting/**")
                         .uri("lb://sighting-service"))
+                .route("default-fallback", r -> r
+                        .path("/**")
+                        .uri("lb://frontend-service"))
                 .build();
     }
 }

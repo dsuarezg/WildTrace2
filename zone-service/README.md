@@ -84,7 +84,7 @@ http://localhost:8082/swagger-ui/index.html
 ## Tecnologías utilizadas
 
 - Java 21
-- Spring Boot 3.4
+- Spring Boot 3.4.6
 - Spring Data JPA
 - MySQL / MariaDB
 - Maven
@@ -145,3 +145,5 @@ Cubre:
 - [ ] Contador de especies observadas por zona
 
 ---
+
+Desarrollado con ❤️ para **WildTrace**

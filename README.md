@@ -156,4 +156,8 @@ Todos los servicios cuentan con:
 - [ ] Filtros avanzados en Sightings por fecha, especie, zona
 - [ ] Enriquecer respuestas con datos relacionados (DTOs anidados)
 - [ ] Exponer métricas o estadísticas (frecuencia, zonas calientes)
-- [ ] Refactor hacia arquitectura hexagonal (por puertos y adaptadores)# WildTrace
+- [ ] Refactor hacia arquitectura hexagonal (por puertos y adaptadores)
+
+---
+
+Desarrollado por Daniel Suárez con ❤️ para **WildTrace**
