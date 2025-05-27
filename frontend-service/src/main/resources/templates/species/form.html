@@ -2,32 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${title}">Formulario</title>
+    <title th:text="${action == 'edit'} ? 'Editar especie' : 'Nueva especie'">Formulario especie</title>
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 </head>
 <body>
+
 <header>
-    <h1 th:text="${title}">Formulario</h1>
-    <a href="/" style="float:right;">Inicio</a>
+    <h1 th:text="${action == 'edit'} ? '✏️ Editar especie' : '🆕 Nueva especie'">Formulario especie</h1>
+    <a href="/species" style="float: right;">← Volver al listado</a>
 </header>
 
-<main>
-    <form th:action="@{${formAction}}" th:object="${species}" method="post">
-        <input type="hidden" th:if="${species.speciesId}" name="_method" value="put"/>
-        <label>Nombre común:</label>
-        <input type="text" th:field="*{commonName}" required/>
+<main style="max-width: 600px; margin: 0 auto;">
 
-        <label>Nombre científico:</label>
-        <input type="text" th:field="*{scientificName}" required/>
+    <form th:action="@{${action == 'edit'} ? '/species/update/' + ${speciesId} : '/species/create'}"
+          method="post" th:object="${species}">
 
-        <label>Estado de conservación:</label>
-        <input type="text" th:field="*{conservationStatus}" required/>
+        <div th:if="${action == 'edit'}" style="margin-bottom: 1rem;">
+            <label>ID</label>
+            <input type="text" th:value="${speciesId}" disabled style="background-color: #f0f0f0;">
+        </div>
 
-        <button type="submit">Guardar</button>
+        <label for="commonName">Nombre común</label>
+        <input type="text" id="commonName" th:field="*{commonName}" placeholder="Ej. Lince ibérico" required>
+
+        <label for="scientificName">Nombre científico</label>
+        <input type="text" id="scientificName" th:field="*{scientificName}" placeholder="Ej. Lynx pardinus" required>
+
+        <label for="conservationStatus">Estado de conservación</label>
+        <input type="text" id="conservationStatus" th:field="*{conservationStatus}" placeholder="Ej. Endangered">
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+            <button type="submit" th:style="${action == 'edit'} ? 'background-color: orange;' : 'background-color: limegreen; color: white;'"
+                    th:text="${action == 'edit'} ? '✏️ Actualizar especie' : '✅ Crear especie'">
+                Guardar
+            </button>
+            <a href="/species" style="align-self: center;">Cancelar</a>
+        </div>
+
     </form>
+
 </main>
-<footer>
+
+<footer style="margin-top: 2rem;">
     <p>WildTrace © 2025</p>
 </footer>
+
 </body>
 </html>
