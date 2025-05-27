@@ -12,7 +12,7 @@ public interface ZoneServiceClient {
      * Retrieves the details of a zone by its unique identifier.
      *
      * @param id the unique identifier of the zone
-     * @return the details of the specified zone
+     * @return the details of the specified zone as a ZoneResponseDTO
      */
     @GetMapping("/api/zones/{id}")
     ZoneResponseDTO getZoneById(@PathVariable Long id);
