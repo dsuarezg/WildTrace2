@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${sightingId} != null ? 'Editar avistamiento' : 'Nuevo avistamiento'">Formulario Avistamiento</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+
+<header>
+    <h1 th:text="${sightingId} != null ? '✏️ Editar avistamiento' : '🆕 Nuevo avistamiento'">Formulario Avistamiento</h1>
+    <a href="/sightings" style="float:right;">← Volver al listado</a>
+</header>
+
+<main style="max-width: 600px; margin: 0 auto;">
+    <form th:action="${sightingId != null ? '/sightings/update/' + sightingId : '/sightings/create'}"
+          method="post" th:object="${sighting}">
+
+        <div th:if="${sightingId != null}">
+            <label>ID</label>
+            <input type="text" th:value="${sightingId}" disabled style="background-color: #eee;">
+        </div>
+
+        <label for="zoneId">Zona</label>
+        <select id="zoneId" name="zoneId" th:field="*{zoneId}" required>
+            <option th:each="z : ${zoneOptions}" th:value="${z.zoneId}" th:text="${z.zoneName}">Zona</option>
+        </select>
+
+        <label for="speciesId">Especie</label>
+        <select id="speciesId" name="speciesId" th:field="*{speciesId}" required>
+            <option th:each="sp : ${speciesOptions}" th:value="${sp.id}" th:text="${sp.commonName}">Especie</option>
+        </select>
+
+        <label for="date">Fecha del avistamiento</label>
+        <input type="date" id="date" th:field="*{date}" required />
+
+        <label for="observedBy">Observado por</label>
+        <input type="text" id="observedBy" th:field="*{observedBy}" placeholder="Ej. Ana Martínez" required />
+
+        <label for="method">Método de observación</label>
+        <input type="text" id="method" th:field="*{method}" placeholder="Ej. Observación directa" />
+
+        <label for="notes">Notas adicionales</label>
+        <textarea id="notes" th:field="*{notes}" placeholder="Ej. Observado cerca de un arroyo..."></textarea>
+
+        <div style="margin-top: 1rem;">
+            <button type="submit" th:text="${sightingId != null ? 'Actualizar' : 'Registrar'}"
+                    style="background-color: green; color: white;">Guardar</button>
+            <a href="/sightings" style="margin-left: 1rem;">Cancelar</a>
+        </div>
+    </form>
+</main>
+
+<footer>
+    <p>WildTrace © 2025</p>
+</footer>
+
+</body>
+</html>

@@ -22,7 +22,7 @@ public class GatewayConfig {
                         .uri("lb://species-service"))
                 .route("zone", r -> r.path("/api/zones/**")
                         .uri("lb://zone-service"))
-                .route("sighting", r -> r.path("/api/sighting/**")
+                .route("sighting", r -> r.path("/api/sightings/**")
                         .uri("lb://sighting-service"))
                 .route("default-fallback", r -> r
                         .predicate(p -> {
