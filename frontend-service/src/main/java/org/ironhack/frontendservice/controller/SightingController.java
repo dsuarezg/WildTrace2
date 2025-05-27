@@ -1,3 +1,4 @@
+/*
 package org.ironhack.frontendservice.controller;
 
 import org.ironhack.frontendservice.dto.SightingRequestDTO;
@@ -87,7 +88,6 @@ public class SightingController {
         return "redirect:/sightings";
     }
 
-    // Métodos auxiliares para cargar listas de especies y zonas
     private List<SpeciesResponseDTO> fetchSpecies() {
         ResponseEntity<SpeciesResponseDTO[]> response = restTemplate.getForEntity(
                 gatewayBaseUrl + "/api/species", SpeciesResponseDTO[].class);
@@ -98,5 +98,108 @@ public class SightingController {
         ResponseEntity<ZoneResponseDTO[]> response = restTemplate.getForEntity(
                 gatewayBaseUrl + "/api/zones", ZoneResponseDTO[].class);
         return Arrays.asList(response.getBody());
+    }
+}
+*/
+package org.ironhack.frontendservice.controller;
+
+import org.ironhack.frontendservice.dto.SightingRequestDTO;
+import org.ironhack.frontendservice.dto.SightingResponseDTO;
+import org.ironhack.frontendservice.dto.SpeciesResponseDTO;
+import org.ironhack.frontendservice.dto.ZoneResponseDTO;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.*;
+
+@Controller
+@RequestMapping("/sightings")
+public class SightingController {
+
+    private final RestTemplate restTemplate;
+
+    @Value("${wildtrace.gateway.base-url}")
+    private String gatewayBaseUrl;
+
+    public SightingController(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+    @GetMapping
+    public String listSightings(Model model) {
+        SightingResponseDTO[] sightings = restTemplate.getForObject(gatewayBaseUrl + "/api/sightings", SightingResponseDTO[].class);
+        model.addAttribute("sightingList", Arrays.asList(sightings));
+
+        // Mapeamos los IDs a nombres para mostrar
+        Map<Long, String> speciesNames = new HashMap<>();
+        Map<Long, String> zoneNames = new HashMap<>();
+
+        Arrays.stream(restTemplate.getForObject(gatewayBaseUrl + "/api/species", SpeciesResponseDTO[].class))
+                .forEach(s -> speciesNames.put(s.getId(), s.getCommonName()));
+        Arrays.stream(restTemplate.getForObject(gatewayBaseUrl + "/api/zones", ZoneResponseDTO[].class))
+                .forEach(z -> zoneNames.put(z.getZoneId(), z.getZoneName()));
+
+        model.addAttribute("speciesMap", speciesNames);
+        model.addAttribute("zoneMap", zoneNames);
+
+        return "sightings/list";
+    }
+
+    @GetMapping("/new")
+    public String showCreateForm(Model model) {
+        model.addAttribute("sighting", new SightingRequestDTO());
+        model.addAttribute("action", "create");
+        loadSpeciesAndZones(model);
+        return "sightings/form";
+    }
+
+    @PostMapping("/create")
+    public String createSighting(@ModelAttribute("sighting") SightingRequestDTO dto) {
+        HttpEntity<SightingRequestDTO> request = new HttpEntity<>(dto);
+        restTemplate.postForEntity(gatewayBaseUrl + "/api/sightings", request, SightingResponseDTO.class);
+        return "redirect:/sightings";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        SightingResponseDTO response = restTemplate.getForObject(gatewayBaseUrl + "/api/sightings/" + id, SightingResponseDTO.class);
+
+        SightingRequestDTO form = new SightingRequestDTO();
+        form.setSpeciesId(response.getSpeciesId());
+        form.setZoneId(response.getZoneId());
+        form.setDate(response.getDate());
+        form.setObservedBy(response.getObservedBy());
+        form.setMethod(response.getMethod());
+        form.setNotes(response.getNotes());
+
+        model.addAttribute("sighting", form);
+        model.addAttribute("sightingId", id);
+        model.addAttribute("action", "edit");
+        loadSpeciesAndZones(model);
+        return "sightings/form";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateSighting(@PathVariable Long id, @ModelAttribute("sighting") SightingRequestDTO dto) {
+        HttpEntity<SightingRequestDTO> request = new HttpEntity<>(dto);
+        restTemplate.exchange(gatewayBaseUrl + "/api/sightings/" + id, HttpMethod.PUT, request, Void.class);
+        return "redirect:/sightings";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteSighting(@PathVariable Long id) {
+        restTemplate.delete(gatewayBaseUrl + "/api/sightings/" + id);
+        return "redirect:/sightings";
+    }
+
+    private void loadSpeciesAndZones(Model model) {
+        SpeciesResponseDTO[] species = restTemplate.getForObject(gatewayBaseUrl + "/api/species", SpeciesResponseDTO[].class);
+        ZoneResponseDTO[] zones = restTemplate.getForObject(gatewayBaseUrl + "/api/zones", ZoneResponseDTO[].class);
+        model.addAttribute("speciesList", Arrays.asList(species));
+        model.addAttribute("zoneList", Arrays.asList(zones));
     }
 }

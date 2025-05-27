@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -48,5 +49,53 @@
 <footer>
     <p>WildTrace © 2025</p>
 </footer>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>🔭 Avistamientos - WildTrace</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+<header>
+    <h1>🔭 Avistamientos</h1>
+    <a href="/" style="float:right;">← Volver</a>
+</header>
+
+<main>
+    <a href="/sightings/new">➕ Nuevo Avistamiento</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Zona</th>
+            <th>Especie</th>
+            <th>Fecha</th>
+            <th>Observador</th>
+            <th>Método</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="s : ${sightingList}">
+            <td th:text="${zoneMap[s.zoneId]}">Zona</td>
+            <td th:text="${speciesMap[s.speciesId]}">Especie</td>
+            <td th:text="${s.date}">Fecha</td>
+            <td th:text="${s.observedBy}">Observador</td>
+            <td th:text="${s.method}">Método</td>
+            <td>
+                <form th:action="@{'/sightings/edit/' + ${s.id}}" method="get" style="display:inline;">
+                    <button>✏️</button>
+                </form>
+                <form th:action="@{'/sightings/delete/' + ${s.id}}" method="post" style="display:inline;">
+                    <button style="color: red;">🗑️</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>
