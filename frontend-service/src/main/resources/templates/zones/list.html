@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Zonas - WildTrace</title>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+<header>
+  <h1>🗺️ Zonas Naturalizadas</h1>
+  <a href="/" style="float:right;">← Volver a inicio</a>
+</header>
+
+<main>
+  <a href="/zones/new" style="background-color: #2d862d; color: white; padding: 0.5em 1em; text-decoration: none; border-radius: 5px;">
+    ➕ Añadir zona
+  </a>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Latitud</th>
+      <th>Longitud</th>
+      <th>Mapa</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="z : ${zoneList}">
+      <td th:text="${z.zoneName}">Nombre</td>
+      <td th:text="${z.latitude}">Lat</td>
+      <td th:text="${z.longitude}">Lng</td>
+      <td><img th:src="${z.mapImageUrl}" alt="Mapa" style="width: 100px; height: auto;"/></td>
+      <td>
+        <form th:action="@{'/zones/edit/' + ${z.zoneId}}" method="get" style="display:inline;">
+          <button style="background-color: orange; color: white;">✏️</button>
+        </form>
+        <form th:action="@{'/zones/delete/' + ${z.zoneId}}" method="post" style="display:inline;">
+          <button style="background-color: crimson; color: white;">🗑️</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+
+<footer>
+  <p>WildTrace © 2025</p>
+</footer>
+</body>
+</html>

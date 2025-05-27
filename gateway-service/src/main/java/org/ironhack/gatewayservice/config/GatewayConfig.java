@@ -20,12 +20,17 @@ public class GatewayConfig {
         return builder.routes()
                 .route("species", r -> r.path("/api/species/**")
                         .uri("lb://species-service"))
-                .route("zone", r -> r.path("/api/zone/**")
+                .route("zone", r -> r.path("/api/zones/**")
                         .uri("lb://zone-service"))
                 .route("sighting", r -> r.path("/api/sighting/**")
                         .uri("lb://sighting-service"))
                 .route("default-fallback", r -> r
-                        .path("/**")
+                        .predicate(p -> {
+                            String path = p.getRequest().getURI().getPath();
+                            return !path.startsWith("/swagger-ui")
+                                    && !path.equals("/swagger-ui.html")
+                                    && !path.startsWith("/v3/api-docs");
+                        })
                         .uri("lb://frontend-service"))
                 .build();
     }
