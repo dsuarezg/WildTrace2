@@ -9,28 +9,23 @@ import org.springframework.context.annotation.Configuration;
 public class GatewayConfig {
 
     /**
-     * Defines routing rules for the API gateway, forwarding requests to microservices based on path patterns.
+     * Defines custom routing rules for the API gateway, mapping specific path patterns to corresponding microservices.
      *
-     * Routes requests with paths starting with `/api/species/**` to the species service, `/api/zones/**` to the zone service, and `/api/sightings/**` to the sighting service. All other requests, except those targeting Swagger UI or API documentation endpoints, are routed to the frontend service.
+     * Requests to `/api/species/**`, `/api/zone/**`, and `/api/sighting/**` are routed to the `species-service`, `zone-service`, and `sighting-service` respectively using load balancing.
      *
-     * @return a RouteLocator configured with the specified routing rules
+     * @return a RouteLocator with the configured routes for species, zone, and sighting services
      */
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("species", r -> r.path("/api/species/**")
                         .uri("lb://species-service"))
-                .route("zone", r -> r.path("/api/zones/**")
+                .route("zone", r -> r.path("/api/zone/**")
                         .uri("lb://zone-service"))
-                .route("sighting", r -> r.path("/api/sightings/**")
+                .route("sighting", r -> r.path("/api/sighting/**")
                         .uri("lb://sighting-service"))
                 .route("default-fallback", r -> r
-                        .predicate(p -> {
-                            String path = p.getRequest().getURI().getPath();
-                            return !path.startsWith("/swagger-ui")
-                                    && !path.equals("/swagger-ui.html")
-                                    && !path.startsWith("/v3/api-docs");
-                        })
+                        .path("/**")
                         .uri("lb://frontend-service"))
                 .build();
     }

@@ -3,15 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <title>📘 Catálogo de Especies</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <style>
+        body {
+            font-size: 16px;
+            background-color: #1a1a1a;
+            color: #eee;
+        }
+
+        header h1 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+            padding: 0.5em 1.2em;
+            font-weight: bold;
+            font-size: 0.95em;
+            text-decoration: none;
+            border-radius: 6px;
+            min-width: 100px;
+            height: 42px;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s ease;
+            color: #fff;
+        }
+
+        .btn-create {
+            background-color: #28a745;
+        }
+
+        .btn-create:hover {
+            background-color: #218838;
+        }
+
+        .btn-edit {
+            background-color: #fd7e14;
+        }
+
+        .btn-edit:hover {
+            background-color: #e36a0c;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5em;
+            justify-content: center;
+        }
+
+        table th, table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        table td {
+            color: #f4f4f4;
+        }
+
+        .btn span.icon {
+            font-size: 1.1em;
+            line-height: 1;
+        }
+
+        footer {
+            margin-top: 2rem;
+        }
+    </style>
 </head>
 <body>
+
 <header>
-    <h1>📘 Catálogo de Especies</h1>
-    <a href="/">Inicio</a>
+    <div class="top-bar">
+        <h1>📘 Catálogo de Especies</h1>
+        <a href="/" style="font-size: 0.9em;">Inicio</a>
+    </div>
 </header>
+
 <main>
-    <a href="/species/new" class="btn-create">➕ Nueva especie</a>
+    <a href="/species/new" class="btn btn-create">
+        <span class="icon">🟢</span> Nueva especie
+    </a>
+
     <table>
         <thead>
         <tr>
@@ -29,17 +122,23 @@
             <td th:text="${s.scientificName}">Científico</td>
             <td th:text="${s.conservationStatus}">Estado</td>
             <td class="actions">
-                <a th:href="@{'/species/edit/' + ${s.id}}" class="btn-action btn-edit">✏️</a>
-                <form th:action="@{'/species/delete/' + ${s.id}}" method="post">
-                    <button type="submit" class="btn-delete">🗑️</button>
+                <a th:href="@{'/species/edit/' + ${s.id}}" class="btn btn-edit">
+                    <span class="icon">✍️</span> Editar
+                </a>
+                <form th:action="@{'/species/delete/' + ${s.id}}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-delete">
+                        <span class="icon">🗑️</span> Borrar
+                    </button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
 </main>
+
 <footer>
-    <p>WildTrace 🐦 2025</p>
+    <p>WildTrace © 2025</p>
 </footer>
+
 </body>
 </html>
