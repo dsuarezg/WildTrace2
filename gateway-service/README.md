@@ -26,9 +26,7 @@ Además, expone una vista unificada de la documentación **Swagger UI** agregand
 .route("species", r -> r.path("/api/species/**").uri("lb://species-service"))
 .route("zone", r -> r.path("/api/zone/**").uri("lb://zone-service"))
 .route("sighting", r -> r.path("/api/sighting/**").uri("lb://sighting-service"))
-```
-
-Todas las rutas hacia los microservicios pasan por el Gateway y usan el patrón `/api/...`.
+.route("default-fallback", r -> r.alwaysTrue().uri("lb://fallback-service"))
 
 ---
 
