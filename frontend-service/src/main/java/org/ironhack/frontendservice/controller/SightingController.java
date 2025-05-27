@@ -125,10 +125,22 @@ public class SightingController {
     @Value("${wildtrace.gateway.base-url}")
     private String gatewayBaseUrl;
 
+    /**
+     * Constructs a SightingController with the specified RestTemplate for backend API communication.
+     *
+     * @param restTemplate the RestTemplate used to perform REST calls to the backend service
+     */
     public SightingController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
+    /****
+     * Handles GET requests to list all wildlife sightings.
+     *
+     * Retrieves all sightings from the backend API, along with species and zone data, and adds them to the model for display in the sightings list view.
+     *
+     * @return the name of the view to render the sightings list
+     */
     @GetMapping
     public String listSightings(Model model) {
         SightingResponseDTO[] sightings = restTemplate.getForObject(gatewayBaseUrl + "/api/sightings", SightingResponseDTO[].class);
@@ -149,6 +161,13 @@ public class SightingController {
         return "sightings/list";
     }
 
+    /****
+     * Handles GET requests to display the form for creating a new sighting.
+     *
+     * Adds an empty sighting DTO and action indicator to the model, and loads species and zone lists for form selection.
+     *
+     * @return the name of the view for the sighting creation form
+     */
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("sighting", new SightingRequestDTO());
@@ -157,6 +176,11 @@ public class SightingController {
         return "sightings/form";
     }
 
+    /**
+     * Handles the creation of a new wildlife sighting by submitting the provided data to the backend API.
+     *
+     * Redirects to the sightings list view after successful creation.
+     */
     @PostMapping("/create")
     public String createSighting(@ModelAttribute("sighting") SightingRequestDTO dto) {
         HttpEntity<SightingRequestDTO> request = new HttpEntity<>(dto);
@@ -164,6 +188,14 @@ public class SightingController {
         return "redirect:/sightings";
     }
 
+    /**
+     * Displays the edit form for an existing sighting, pre-populated with the sighting's current data.
+     *
+     * Retrieves the sighting by its ID from the backend API, maps its details into a form DTO, and adds it to the model along with species and zone options for selection.
+     *
+     * @param id the ID of the sighting to edit
+     * @return the view name for the sighting edit form
+     */
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         SightingResponseDTO response = restTemplate.getForObject(gatewayBaseUrl + "/api/sightings/" + id, SightingResponseDTO.class);
@@ -183,6 +215,13 @@ public class SightingController {
         return "sightings/form";
     }
 
+    /**
+     * Updates an existing sighting with the provided data and redirects to the sightings list.
+     *
+     * @param id the ID of the sighting to update
+     * @param dto the updated sighting data
+     * @return a redirect to the sightings list view
+     */
     @PostMapping("/update/{id}")
     public String updateSighting(@PathVariable Long id, @ModelAttribute("sighting") SightingRequestDTO dto) {
         HttpEntity<SightingRequestDTO> request = new HttpEntity<>(dto);
@@ -190,12 +229,23 @@ public class SightingController {
         return "redirect:/sightings";
     }
 
+    /**
+     * Deletes a sighting by its ID and redirects to the sightings list view.
+     *
+     * @param id the ID of the sighting to delete
+     * @return a redirect to the sightings list page
+     */
     @PostMapping("/delete/{id}")
     public String deleteSighting(@PathVariable Long id) {
         restTemplate.delete(gatewayBaseUrl + "/api/sightings/" + id);
         return "redirect:/sightings";
     }
 
+    /**
+     * Fetches species and zone data from the backend API and adds them to the model for use in forms.
+     *
+     * Adds the lists as model attributes "speciesList" and "zoneList".
+     */
     private void loadSpeciesAndZones(Model model) {
         SpeciesResponseDTO[] species = restTemplate.getForObject(gatewayBaseUrl + "/api/species", SpeciesResponseDTO[].class);
         ZoneResponseDTO[] zones = restTemplate.getForObject(gatewayBaseUrl + "/api/zones", ZoneResponseDTO[].class);

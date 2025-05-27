@@ -8,8 +8,8 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class FrontendServiceApplication {
 
-    /****
-     * Launches the Spring Boot application.
+    /**
+     * Entry point for the Spring Boot application.
      *
      * @param args command-line arguments passed to the application
      */
@@ -18,9 +18,9 @@ public class FrontendServiceApplication {
     }
 
     /**
-     * Provides a RestTemplate bean for performing synchronous HTTP requests.
+     * Creates and exposes a RestTemplate bean for synchronous HTTP requests.
      *
-     * @return a new RestTemplate instance
+     * @return a RestTemplate instance for making HTTP calls
      */
     @Bean
     public RestTemplate restTemplate() {

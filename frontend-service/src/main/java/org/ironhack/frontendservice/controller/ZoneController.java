@@ -20,10 +20,21 @@ public class ZoneController {
     @Value("${wildtrace.gateway.base-url}")
     private String gatewayBaseUrl;
 
+    /**
+     * Constructs a ZoneController with the specified RestTemplate for backend API communication.
+     *
+     * @param restTemplate the RestTemplate used to perform HTTP requests to the external gateway API
+     */
     public ZoneController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
+    /****
+     * Handles GET requests to "/zones" by retrieving the list of zones from the backend API and adding it to the model for display.
+     *
+     * @param model the model to which the list of zones will be added as "zoneList"
+     * @return the name of the view to render the zone list
+     */
     @GetMapping
     public String listZones(Model model) {
         ResponseEntity<ZoneResponseDTO[]> response = restTemplate.getForEntity(
@@ -32,6 +43,13 @@ public class ZoneController {
         return "zones/list";
     }
 
+    /**
+     * Displays the form for creating a new zone.
+     *
+     * Adds a blank ZoneRequestDTO to the model for form binding and sets the action attribute to indicate creation mode.
+     *
+     * @return the view name for the zone creation form
+     */
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("zone", new ZoneRequestDTO());
@@ -39,6 +57,11 @@ public class ZoneController {
         return "zones/form";
     }
 
+    /**
+     * Handles the creation of a new zone by submitting the provided data to the backend API.
+     *
+     * Redirects to the zone list view after successfully creating the zone.
+     */
     @PostMapping("/create")
     public String createZone(@ModelAttribute("zone") ZoneRequestDTO dto) {
         HttpEntity<ZoneRequestDTO> request = new HttpEntity<>(dto);
@@ -46,6 +69,15 @@ public class ZoneController {
         return "redirect:/zones";
     }
 
+    /**
+     * Displays the edit form for an existing zone by retrieving its details from the backend API.
+     *
+     * Populates the model with the zone's current data for form binding, the zone ID, and an action indicator.
+     *
+     * @param id the ID of the zone to edit
+     * @param model the model to populate with zone data and form attributes
+     * @return the view name for the zone edit form
+     */
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         ZoneResponseDTO zone = restTemplate.getForObject(
@@ -62,6 +94,13 @@ public class ZoneController {
         return "zones/form";
     }
 
+    /**
+     * Updates an existing zone by sending the provided data to the backend API and redirects to the zone list view.
+     *
+     * @param id the ID of the zone to update
+     * @param dto the updated zone data
+     * @return a redirect instruction to the zone list page
+     */
     @PostMapping("/update/{id}")
     public String updateZone(@PathVariable Long id, @ModelAttribute("zone") ZoneRequestDTO dto) {
         HttpEntity<ZoneRequestDTO> request = new HttpEntity<>(dto);
@@ -74,6 +113,12 @@ public class ZoneController {
         return "redirect:/zones";
     }
 
+    /**
+     * Deletes a zone with the specified ID via the backend API and redirects to the zone list view.
+     *
+     * @param id the ID of the zone to delete
+     * @return a redirect instruction to the zones list page
+     */
     @PostMapping("/delete/{id}")
     public String deleteZone(@PathVariable Long id) {
         restTemplate.delete(gatewayBaseUrl + "/api/zones/" + id);
