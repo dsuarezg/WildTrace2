@@ -22,19 +22,21 @@ public class HomeController {
     private String gatewayBaseUrl;
 
     /****
-     * Constructs a HomeController with the specified RestTemplate for communicating with the external species API.
+     * Initializes the HomeController with a RestTemplate for backend API communication.
+     *
+     * @param restTemplate the RestTemplate used to interact with the external species API
      */
     public HomeController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     /**
-     * Handles GET requests to display a list of all species.
-     *
-     * Retrieves species data from the backend API, adds the list to the model under "speciesList", and returns the view for displaying the species list.
-     *
-     * @return the name of the Thymeleaf view for listing species
-     */
+         * Handles GET requests to display all species.
+         *
+         * Fetches the list of species from the backend API, adds it to the model as "speciesList", and returns the view for displaying the species list.
+         *
+         * @return the name of the view for listing species
+         */
     @GetMapping
     public String listSpecies(Model model) {
         ResponseEntity<SpeciesResponseDTO[]> response = restTemplate.getForEntity(
@@ -44,11 +46,11 @@ public class HomeController {
     }
 
     /**
-     * Displays the form for creating a new species.
+     * Handles GET requests to display the form for creating a new species.
      *
-     * Adds an empty species DTO and a creation action indicator to the model for form binding.
+     * Adds an empty SpeciesRequestDTO and an action indicator to the model for form binding in the creation view.
      *
-     * @return the view name for the species creation form
+     * @return the name of the view for the species creation form
      */
     @GetMapping("/new")
     public String showCreateForm(Model model) {
@@ -58,9 +60,12 @@ public class HomeController {
     }
 
     /**
-     * Handles the submission of the create species form and sends a request to create a new species via the backend API.
+     * Processes the submission of the new species form and creates a species via the backend API.
      *
-     * Redirects to the species list page after successful creation.
+     * After successfully creating the species, redirects to the species list page.
+     *
+     * @param dto the data for the species to be created
+     * @return a redirect to the species list view
      */
     @PostMapping("/create")
     public String createSpecies(@ModelAttribute("species") SpeciesRequestDTO dto) {
@@ -70,9 +75,9 @@ public class HomeController {
     }
 
     /**
-     * Displays the form for editing an existing species by fetching its data from the backend service.
+     * Handles GET requests to display the edit form for a species.
      *
-     * Retrieves the species identified by the given ID, converts its data for form binding, and populates the model for rendering the edit form view.
+     * Fetches the species data by ID from the backend API, prepares it for form binding, and populates the model with the species information and form attributes for editing.
      *
      * @param id the ID of the species to edit
      * @param model the model to populate with species data and form attributes
@@ -96,11 +101,13 @@ public class HomeController {
     }
 
     /**
-     * Updates an existing species by sending the provided data to the backend API.
+     * Handles POST requests to update an existing species with new data.
      *
-     * @param id the ID of the species to update
-     * @param dto the updated species data
-     * @return a redirect to the species list page after the update
+     * Sends the updated species information to the backend API and redirects to the species list page upon completion.
+     *
+     * @param id the unique identifier of the species to update
+     * @param dto the new data for the species
+     * @return a redirect string to the species list view
      */
     @PostMapping("/update/{id}")
     public String updateSpecies(@PathVariable Long id, @ModelAttribute("species") SpeciesRequestDTO dto) {
@@ -115,10 +122,10 @@ public class HomeController {
     }
 
     /**
-     * Deletes a species by its ID via the backend API and redirects to the species list page.
+     * Handles POST requests to delete a species by its ID and redirects to the species list page.
      *
-     * @param id the unique identifier of the species to delete
-     * @return a redirect instruction to the species list view
+     * @param id the ID of the species to be deleted
+     * @return a redirect to the species list view after deletion
      */
     @PostMapping("/delete/{id}")
     public String deleteSpecies(@PathVariable Long id) {

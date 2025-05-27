@@ -35,9 +35,9 @@ public class SightingController {
     }
 
     /**
-     * Returns a list of all recorded species sightings.
+     * Retrieves all recorded species sightings.
      *
-     * @return ResponseEntity with HTTP 200 status containing all SightingResponseDTO objects
+     * @return ResponseEntity with HTTP 200 status containing a list of SightingResponseDTO objects
      */
     @GetMapping("")
     @Operation(summary = "Retrieve all sightings")
@@ -51,7 +51,7 @@ public class SightingController {
     /****
      * Retrieves a species sighting by its unique identifier.
      *
-     * @param id the ID of the sighting to retrieve
+     * @param id the unique identifier of the sighting
      * @return a ResponseEntity containing the sighting data if found
      */
     @GetMapping("/{id}")
@@ -124,10 +124,10 @@ public class SightingController {
 
 
     /**
-     * Handles requests where a specified zone is not found by returning a 404 Not Found response with the error message.
+     * Returns a 404 Not Found response with the error message when a requested zone does not exist.
      *
-     * @param ex the exception indicating the requested zone does not exist
-     * @return a response entity with the exception message and HTTP 404 status
+     * @param ex the exception indicating the zone was not found
+     * @return a response entity containing the exception message and HTTP 404 status
      */
     @ExceptionHandler(ZoneNotFoundException.class)
     public ResponseEntity<String> handleZoneNotFound(ZoneNotFoundException ex) {
@@ -135,10 +135,10 @@ public class SightingController {
     }
 
     /**
-     * Handles SpeciesNotFoundException by returning an HTTP 404 response with the exception message.
+     * Returns a 404 Not Found response with the error message when a species is not found.
      *
-     * @param ex the exception indicating the requested species was not found
-     * @return a response entity containing the exception message and a 404 status code
+     * @param ex the exception indicating the species was not found
+     * @return a response entity with the exception message and HTTP 404 status
      */
     @ExceptionHandler(SpeciesNotFoundException.class)
     public ResponseEntity<String> handleSpeciesNotFound(SpeciesNotFoundException ex) {
@@ -148,8 +148,8 @@ public class SightingController {
     /**
      * Handles SightingNotFoundException by returning a 404 Not Found response with the error message.
      *
-     * @param ex the exception indicating the requested sighting was not found
-     * @return a ResponseEntity with the exception message and HTTP 404 status
+     * @param ex the exception indicating the sighting was not found
+     * @return a ResponseEntity containing the error message and HTTP 404 status
      */
     @ExceptionHandler(SightingNotFoundException.class)
     public ResponseEntity<String> handleSightingNotFound(SightingNotFoundException ex) {
