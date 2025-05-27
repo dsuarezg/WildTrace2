@@ -1,5 +1,5 @@
 <div style="text-align: center;">
-  <img src="src/main/resources/static/banner.png" alt="WildTrace Gateway Service">
+  <img src="src/main/resources/static/banner.png" alt="WildTrace Discovery Server">
 </div>
 
 # WildTrace – Discovery Server
