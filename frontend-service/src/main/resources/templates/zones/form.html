@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${zoneId != null ? 'Editar zona' : 'Nueva zona'}">Formulario zona</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<header style="text-align: center;">
+  <h1 th:text="${zoneId != null ? '✏️ Editar zona' : '🆕 Nueva zona'}">Formulario zona</h1>
+</header>
+
+<div style="text-align: right; margin: 0 0 1rem 0;">
+  <a href="/zones" style="color: var(--header-color); font-weight: bold; text-decoration: none;">← Volver al listado</a>
+</div>
+
+<main class="form-container">
+  <form th:action="${zoneId != null ? '/zones/update/' + zoneId : '/zones/create'}"
+        method="post" th:object="${zone}">
+
+    <div th:if="${zoneId != null}" class="form-group">
+      <label>ID</label>
+      <input type="text" th:value="${zoneId}" disabled class="input input-disabled">
+    </div>
+
+    <div class="form-group">
+      <label for="zoneName">Nombre de la zona</label>
+      <input type="text" id="zoneName" th:field="*{zoneName}" required class="input">
+    </div>
+
+    <div class="form-group">
+      <label for="latitude">Latitud</label>
+      <input type="number" step="0.0001" id="latitude" th:field="*{latitude}" required class="input">
+    </div>
+
+    <div class="form-group">
+      <label for="longitude">Longitud</label>
+      <input type="number" step="0.0001" id="longitude" th:field="*{longitude}" required class="input">
+    </div>
+
+    <div class="form-actions">
+      <button type="submit"
+              th:classappend="${zoneId != null} ? 'btn-edit' : 'btn-create'"
+              class="btn"
+              th:text="${zoneId != null ? 'Actualizar' : 'Crear'}">
+        Guardar
+      </button>
+    </div>
+  </form>
+</main>
+
+<footer>
+  <p>WildTrace 🐦 2025</p>
+</footer>
+</body>
+</html>
