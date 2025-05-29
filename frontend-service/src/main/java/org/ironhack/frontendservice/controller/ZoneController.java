@@ -124,4 +124,14 @@ public class ZoneController {
         restTemplate.delete(gatewayBaseUrl + "/api/zones/" + id);
         return "redirect:/zones";
     }
+
+    private String generateMapUrl(Double lat, Double lon) {
+        return "https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/"
+                + "pin-s+ff0000(" + lon + "," + lat + ")/"
+                + lon + "," + lat + ",13/600x400?access_token=" + mapboxToken;
+    }
+
+    @Value("${mapbox.token}")
+    private String mapboxToken;
+
 }

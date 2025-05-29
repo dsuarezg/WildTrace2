@@ -9,4 +9,5 @@ public class ZoneResponseDTO {
     private Double latitude;
     private Double longitude;
     private String mapImageUrl;
+
 }
