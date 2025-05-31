@@ -140,11 +140,11 @@ public class SightingController {
     }
 
     /****
-     * Handles GET requests to list all wildlife sightings.
+     * Handles GET requests to display the list of wildlife sightings.
      *
-     * Retrieves all sightings from the backend API, along with species and zone data, and adds them to the model for display in the sightings list view.
+     * Retrieves all sightings, species, and zones from the backend API, maps species and zone IDs to their names, and generates Mapbox static map URLs for each zone. Adds these data structures to the model for rendering in the sightings list view.
      *
-     * @return the name of the view to render the sightings list
+     * @return the view name for the sightings list page
      */
     @GetMapping
     public String listSightings(Model model) {
@@ -255,10 +255,10 @@ public class SightingController {
         return "redirect:/sightings";
     }
 
-    /**
-     * Fetches species and zone data from the backend API and adds them to the model for use in forms.
+    /****
+     * Retrieves species and zone lists from the backend API and adds them to the model for form selection.
      *
-     * Adds the lists as model attributes "speciesList" and "zoneList".
+     * The lists are added as model attributes "speciesList" and "zoneList".
      */
     private void loadSpeciesAndZones(Model model) {
         SpeciesResponseDTO[] species = restTemplate.getForObject(gatewayBaseUrl + "/api/species", SpeciesResponseDTO[].class);
@@ -267,6 +267,13 @@ public class SightingController {
         model.addAttribute("zoneList", Arrays.asList(zones));
     }
 
+    /**
+     * Generates a Mapbox static map URL centered at the specified latitude and longitude, including two pins: one red at the exact coordinates and one blue slightly offset.
+     *
+     * @param lat the latitude for the map center and red pin
+     * @param lon the longitude for the map center and red pin
+     * @return a URL string for the Mapbox static map image
+     */
     private String generateMapUrl(Double lat, Double lon) {
         return "https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/"
                 + "pin-s+ff0000(" + lon + "," + lat + "),"
