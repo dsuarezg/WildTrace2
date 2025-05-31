@@ -113,11 +113,11 @@ public class ZoneController {
         return "redirect:/zones";
     }
 
-    /**
-     * Deletes a zone with the specified ID via the backend API and redirects to the zone list view.
+    /****
+     * Handles POST requests to delete a zone by its ID and redirects to the list of zones.
      *
-     * @param id the ID of the zone to delete
-     * @return a redirect instruction to the zones list page
+     * @param id the unique identifier of the zone to be deleted
+     * @return a redirect string to the zones list page
      */
     @PostMapping("/delete/{id}")
     public String deleteZone(@PathVariable Long id) {
@@ -125,6 +125,13 @@ public class ZoneController {
         return "redirect:/zones";
     }
 
+    /**
+     * Constructs a Mapbox static map URL centered at the specified latitude and longitude with a red pin marker.
+     *
+     * @param lat the latitude for the map center and marker
+     * @param lon the longitude for the map center and marker
+     * @return a URL string for a Mapbox static satellite map with a red pin at the given coordinates
+     */
     private String generateMapUrl(Double lat, Double lon) {
         return "https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/"
                 + "pin-s+ff0000(" + lon + "," + lat + ")/"
