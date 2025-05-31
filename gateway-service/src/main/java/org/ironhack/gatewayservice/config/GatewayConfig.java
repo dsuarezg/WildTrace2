@@ -29,7 +29,8 @@ public class GatewayConfig {
                             String path = p.getRequest().getURI().getPath();
                             return !path.startsWith("/swagger-ui")
                                     && !path.equals("/swagger-ui.html")
-                                    && !path.startsWith("/v3/api-docs");
+                                    && !path.startsWith("/v3/api-docs")
+                                    && !path.startsWith("/webjars");
                         })
                         .uri("lb://frontend-service"))
                 .build();
