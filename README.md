@@ -209,6 +209,7 @@ Todos los servicios cuentan con:
 - Tests de integración con MockMvc
 - Cobertura con JaCoCo
 
+
 ---
 
 ## 📈 Próximos pasos
@@ -219,6 +220,14 @@ Todos los servicios cuentan con:
 - [ ] Exponer métricas o estadísticas
 - [ ] Refactor hacia arquitectura hexagonal
 - [ ] Reutilizar lógica de negocio y hacerla abierta y extensible para usos como incendios, rescates u otro tipo de situaciones de riesgo y catástrofes naturales.
+
+---
+
+## Extra Links
+
+- [Planificación ClickUp](https://sharing.clickup.com/90151157132/g/h/6-901511003926-7/bbb0aa91bd8e20e)
+- [Colección de tests en Postman](https://www.postman.com/dsuarezg/wildtrace/collection/rqavbiv/wildtrace-api-collection?action=share&creator=20702470)
+
 
 ---
 

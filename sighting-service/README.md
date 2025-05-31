@@ -138,7 +138,21 @@ mvn clean verify
 Informe generado en:
 ```
 sighting-service/target/site/jacoco/index.html
+
 ```
+| GROUP             | PACKAGE                                   | CLASS                                   | INSTR_MISSED | INSTR_COVERED | % INSTR | LINE_MISSED | LINE_COVERED | % LINE | METHOD_MISSED | METHOD_COVERED | % METHOD |
+|-------------------|-------------------------------------------|-----------------------------------------|--------------|---------------|---------|-------------|--------------|--------|---------------|----------------|----------|
+| sighting-service  | org.ironhack.sightingService              | SightingServiceApplication              | 5            | 3             | 37.5%   | 2           | 1            | 33.3%  | 1             | 1              | 50.0%    |
+| sighting-service  | org.ironhack.sightingService.config       | OpenApiConfig.new WebMvcConfigurer() {...} | 0         | 22            | 100.0%  | 0           | 5            | 100.0% | 0             | 2              | 100.0%   |
+| sighting-service  | org.ironhack.sightingService.config       | OpenApiConfig                           | 0            | 8             | 100.0%  | 0           | 2            | 100.0% | 0             | 2              | 100.0%   |
+| sighting-service  | org.ironhack.sightingService.mapper       | SightingMapper                          | 3            | 64            | 95.5%   | 1           | 17           | 94.4%  | 1             | 2              | 66.7%    |
+| sighting-service  | org.ironhack.sightingService.controller   | SightingController                      | 12           | 45            | 78.9%   | 2           | 10           | 83.3%  | 2             | 7              | 77.8%    |
+| sighting-service  | org.ironhack.sightingService.service      | SightingService                         | 0            | 139           | 100.0%  | 0           | 34           | 100.0% | 0             | 9              | 100.0%   |
+| sighting-service  | org.ironhack.sightingService.exception    | SpeciesNotFoundException                | 4            | 5             | 55.6%   | 2           | 2            | 50.0%  | 1             | 1              | 50.0%    |
+| sighting-service  | org.ironhack.sightingService.exception    | SightingNotFoundException               | 4            | 5             | 55.6%   | 2           | 2            | 50.0%  | 1             | 1              | 50.0%    |
+| sighting-service  | org.ironhack.sightingService.exception    | ZoneNotFoundException                   | 4            | 5             | 55.6%   | 2           | 2            | 50.0%  | 1             | 1              | 50.0%    |
+| **Total**         |                                           |                                         | **32**       | **296**       | **90.2%** | **11**     | **73**       | **86.9%** | **7**        | **26**         | **78.8%** |
+
 
 Incluye:
 - Tests unitarios (`SightingService`)
