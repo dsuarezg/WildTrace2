@@ -9,14 +9,18 @@
 
 <header>
     <h1 class="text-2xl flex items-center gap-2 text-[#493c2d] font-bold">🔭 Avistamientos de Fauna</h1>
-    <a href="/" class="float-right text-[#5b8fa9] font-bold hover:underline">Inicio</a>
+    <a href="/" class="float-right -mt-5 mb-5 mr-1 hover:underline group" title="Inicio" aria-label="Inicio">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 16 16"
+             class="inline align-top transition-transform duration-200 group-hover:scale-110 group-hover:drop-shadow"
+             style="stroke: #493c2d;">
+            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" fill="#493c2d"/>
+            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" fill="#493c2d"/>
+        </svg>
+    </a>
 </header>
 
 <main>
-    <a href="/sightings/new"
-       class="inline-block bg-[#6d8d48] text-white font-bold rounded-md px-4 py-2 my-4 hover:bg-[#56863c] transition">
-        ➕ Nuevo avistamiento
-    </a>
+
 
     <table class="w-full border-collapse bg-white shadow-md rounded-xl">
         <thead>
@@ -60,6 +64,13 @@
         </tr>
         </tbody>
     </table>
+
+    <div class="flex justify-end mt-4">
+        <a href="/sightings/new"
+           class="inline-block bg-[#6d8d48] text-white font-bold rounded-md px-4 py-2 hover:bg-[#56863c] transition">
+            ➕ Nuevo avistamiento
+        </a>
+    </div>
 
     <!-- Backdrop y modal ocultos por defecto -->
     <div id="backdrop" class="fixed inset-0 bg-black bg-opacity-40 z-40 hidden"></div>
