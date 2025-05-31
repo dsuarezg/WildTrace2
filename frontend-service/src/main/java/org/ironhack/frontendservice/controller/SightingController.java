@@ -16,12 +16,12 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/sightings")
+@RequestMapping(“/sightings”)
 public class SightingController {
 
     private final RestTemplate restTemplate;
 
-    @Value("${wildtrace.gateway.base-url}")
+    @Value(“${wildtrace.gateway.base-url}”)
     private String gatewayBaseUrl;
 
     public SightingController(RestTemplate restTemplate) {
@@ -125,6 +125,11 @@ public class SightingController {
     @Value("${wildtrace.gateway.base-url}")
     private String gatewayBaseUrl;
 
+    @Value("${mapbox.token}")
+    private String mapboxToken;
+
+
+
     /**
      * Constructs a SightingController with the specified RestTemplate for backend API communication.
      *
@@ -157,6 +162,15 @@ public class SightingController {
 
         model.addAttribute("speciesMap", speciesNames);
         model.addAttribute("zoneMap", zoneNames);
+
+        Map<Long, String> zoneMapUrl = new HashMap<>();
+        ZoneResponseDTO[] zones = restTemplate.getForObject(gatewayBaseUrl + "/api/zones", ZoneResponseDTO[].class);
+
+        for (ZoneResponseDTO z : zones) {
+            zoneMapUrl.put(z.getZoneId(), generateMapUrl(z.getLatitude(), z.getLongitude()));
+        }
+        model.addAttribute("zoneMapUrl", zoneMapUrl);
+
 
         return "sightings/list";
     }
@@ -252,4 +266,13 @@ public class SightingController {
         model.addAttribute("speciesList", Arrays.asList(species));
         model.addAttribute("zoneList", Arrays.asList(zones));
     }
+
+    private String generateMapUrl(Double lat, Double lon) {
+        return "https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/"
+                + "pin-s+ff0000(" + lon + "," + lat + "),"
+                + "pin-s+0000ff(" + (lon+0.01) + "," + (lat+0.01) + ")/"
+                + lon + "," + lat + ",14,0,0/800x600@2x"
+                + "?access_token=" + mapboxToken;
+    }
+
 }

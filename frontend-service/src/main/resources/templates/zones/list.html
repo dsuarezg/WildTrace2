@@ -3,43 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <title>🗺️ Zonas Naturalizadas</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<header>
-  <h1>🗺️ Zonas Naturalizadas</h1>
-  <a href="/">Inicio</a>
+<body class="bg-[#f7f0dc] text-[#333] font-sans max-w-[900px] mx-auto p-8">
+
+<header class="flex mb-10 justify-between items-center">
+  <h1 class="text-2xl flex items-center gap-2 text-[#493c2d] font-bold">🗺️ Zonas Naturalizadas</h1>
+  <div class="flex justify-end mt-2">
+    <a href="/" class="hover:underline group flex items-center gap-1 text-[#493c2d] font-bold">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 16 16"
+           class="inline align-middle transition-transform duration-200 group-hover:-translate-x-1 group-hover:scale-110 group-hover:drop-shadow"
+           style="stroke: #493c2d;">
+        <path d="M11 2 5 8l6 6" stroke="#493c2d" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      Volver al Inicio
+    </a>
+  </div>
 </header>
+
 <main>
-  <a href="/zones/new" class="btn-create">➕ Nueva zona</a>
-  <table>
+  <table class="w-full border-collapse bg-white shadow-md rounded-xl">
     <thead>
     <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Latitud</th>
-      <th>Longitud</th>
-      <th>Acciones</th>
+      <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">ID</th>
+      <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Nombre</th>
+      <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Latitud</th>
+      <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Longitud</th>
+      <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Acciones</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="z : ${zoneList}">
-      <td th:text="${z.zoneId}">1</td>
-      <td th:text="${z.zoneName}">Nombre</td>
-      <td th:text="${z.latitude}">Lat</td>
-      <td th:text="${z.longitude}">Lng</td>
-      <td class="actions">
-        <a th:href="@{'/zones/edit/' + ${z.zoneId}}" class="btn-action btn-edit">✏️</a>
-        <form th:action="@{'/zones/delete/' + ${z.zoneId}}" method="post">
-          <button type="submit" class="btn-delete">🗑️</button>
-        </form>
+    <tr th:each="z : ${zoneList}" class="even:bg-[#e7e0c6]">
+      <td class="px-3 py-3 border text-center" th:text="${z.zoneId}">1</td>
+      <td class="px-3 py-3 border text-center" th:text="${z.zoneName}">Nombre</td>
+      <td class="px-3 py-3 border text-center" th:text="${z.latitude}">Lat</td>
+      <td class="px-3 py-3 border text-center" th:text="${z.longitude}">Lng</td>
+      <td class="px-3 py-3 border text-center">
+        <div class="flex gap-2 justify-center">
+          <a th:href="@{'/zones/edit/' + ${z.zoneId}}"
+             class="p-1 transition group" title="Editar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#d9863c"
+                 viewBox="0 0 16 16"
+                 class="bi bi-pencil-square group-hover:scale-110 group-hover:drop-shadow group-hover:fill-[#c66b26] transition">
+              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+            </svg>
+          </a>
+          <form th:action="@{'/zones/delete/' + ${z.zoneId}}" method="post" class="inline"
+                onsubmit="return confirm('¿Seguro que deseas eliminar esta zona?');">
+            <button type="submit" class="p-1 transition group" title="Eliminar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#c35b4e"
+                   viewBox="0 0 16 16"
+                   class="bi bi-trash3-fill group-hover:scale-110 group-hover:drop-shadow group-hover:fill-[#a33e33] transition">
+                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+              </svg>
+            </button>
+          </form>
+        </div>
       </td>
     </tr>
     </tbody>
   </table>
+  <div class="flex justify-end mt-4">
+    <a href="/zones/new"
+       class="inline-block bg-[#6d8d48] text-white font-bold rounded-md px-4 py-2 hover:bg-[#56863c] transition">
+      ➕ Nueva zona
+    </a>
+  </div>
 </main>
-<footer>
-  <p>WildTrace 🐦 2025</p>
+<footer class="mt-8 text-sm text-center text-[#777]">
+  <p>WildTrace 🐾 2025</p>
 </footer>
 </body>
 </html>
