@@ -121,7 +121,6 @@ String imageUrl = String.format("https://api.mapbox.com/styles/v1/mapbox/satelli
 |--------------------------------------|---------------------------------------------|
 | `HomeController`, `ZoneController`, `SpeciesController`, `SightingController` | Controladores de vistas |
 | `templates/**/list.html`, `form.html` | Vistas Thymeleaf                           |
-| `css/styles.css`                     | Estilo visual global                        |
 | `banner.png`                         | Imagen principal en index                   |
 
 ---
