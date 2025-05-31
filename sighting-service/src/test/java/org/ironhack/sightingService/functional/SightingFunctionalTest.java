@@ -23,7 +23,7 @@ public class SightingFunctionalTest {
     @DisplayName("Should create and fetch sighting successfully")
     void createAndFetchSighting() {
         SightingRequestDTO dto = new SightingRequestDTO();
-        dto.setZoneId(1L);      // Asegúrate de que esta zona y especie existen
+        dto.setZoneId(1L);
         dto.setSpeciesId(1L);
         dto.setDate(LocalDate.now());
         dto.setObservedBy("María");

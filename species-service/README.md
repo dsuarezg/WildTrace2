@@ -118,6 +118,17 @@ species-service/target/site/jacoco/index.html
 - 100% cobertura de `SpeciesController`
 - Casos positivos y negativos cubiertos (404, validaciones, etc.)
 
+| GROUP            | PACKAGE                                   | CLASS                                   | INSTR_MISSED | INSTR_COVERED | % INSTR | LINE_MISSED | LINE_COVERED | % LINE | METHOD_MISSED | METHOD_COVERED | % METHOD |
+|------------------|-------------------------------------------|-----------------------------------------|--------------|---------------|---------|-------------|--------------|--------|---------------|----------------|----------|
+| species-service  | org.ironhack.speciesService               | SpeciesServiceApplication               | 5            | 3             | 37.5%   | 2           | 1            | 33.3%  | 1             | 1              | 50.0%    |
+| species-service  | org.ironhack.speciesService.controller    | SpeciesController                       | 0            | 42            | 100.0%  | 0           | 8            | 100.0% | 0             | 7              | 100.0%   |
+| species-service  | org.ironhack.speciesService.service       | SpeciesService                          | 0            | 93            | 100.0%  | 0           | 21           | 100.0% | 0             | 9              | 100.0%   |
+| species-service  | org.ironhack.speciesService.exception     | SpeciesNotFoundException                | 4            | 5             | 55.6%   | 2           | 2            | 50.0%  | 1             | 1              | 50.0%    |
+| species-service  | org.ironhack.speciesService.config        | OpenApiConfig                           | 0            | 8             | 100.0%  | 0           | 2            | 100.0% | 0             | 2              | 100.0%   |
+| species-service  | org.ironhack.speciesService.config        | OpenApiConfig.new WebMvcConfigurer() {...} | 0         | 22            | 100.0%  | 0           | 5            | 100.0% | 0             | 2              | 100.0%   |
+| species-service  | org.ironhack.speciesService.mapper        | SpeciesMapper                           | 3            | 40            | 93.0%   | 1           | 11           | 91.7%  | 1             | 2              | 66.7%    |
+| **Total**        |                                           |                                         | **12**       | **213**       | **94.7%** | **5**      | **50**       | **90.9%** | **3**        | **24**         | **88.9%** |
+
 ---
 
 ## Endpoints REST principales

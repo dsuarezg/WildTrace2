@@ -111,6 +111,17 @@ Cubre:
 - 100% del controlador (`ZoneController`)
 - 100% de los endpoints funcionales y errores comunes
 
+| GROUP         | PACKAGE                                 | CLASS                                   | INSTR_MISSED | INSTR_COVERED | % INSTR | LINE_MISSED | LINE_COVERED | % LINE | METHOD_MISSED | METHOD_COVERED | % METHOD |
+|---------------|-----------------------------------------|-----------------------------------------|--------------|---------------|---------|-------------|--------------|--------|---------------|----------------|----------|
+| zone-service  | org.ironhack.zoneService.mapper         | ZoneMapper                              | 3            | 40            | 93.0%   | 1           | 11           | 91.7%  | 1             | 2              | 66.7%    |
+| zone-service  | org.ironhack.zoneService.service        | ZoneService                             | 0            | 93            | 100.0%  | 0           | 21           | 100.0% | 0             | 9              | 100.0%   |
+| zone-service  | org.ironhack.zoneService.config         | OpenApiConfig                           | 0            | 8             | 100.0%  | 0           | 2            | 100.0% | 0             | 2              | 100.0%   |
+| zone-service  | org.ironhack.zoneService.config         | OpenApiConfig.new WebMvcConfigurer() {...} | 0         | 22            | 100.0%  | 0           | 5            | 100.0% | 0             | 2              | 100.0%   |
+| zone-service  | org.ironhack.zoneService.controller     | ZoneController                          | 0            | 45            | 100.0%  | 0           | 10           | 100.0% | 0             | 7              | 100.0%   |
+| zone-service  | org.ironhack.zoneService.exception      | ZoneNotFoundException                   | 4            | 5             | 55.6%   | 2           | 2            | 50.0%  | 1             | 1              | 50.0%    |
+| zone-service  | org.ironhack.zoneService                | ZoneServiceApplication                  | 5            | 3             | 37.5%   | 2           | 1            | 33.3%  | 1             | 1              | 50.0%    |
+| **Total**     |                                         |                                         | **12**       | **216**       | **94.7%** | **5**      | **52**       | **91.1%** | **3**        | **24**         | **88.9%** |
+
 ---
 
 ## Estructura de endpoints REST
