@@ -3,47 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>🔭 Avistamientos</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-[#f7f0dc] text-[#333] font-sans max-w-[900px] mx-auto p-8">
+
 <header>
-    <h1>🔭 Avistamientos de Fauna</h1>
-    <a href="/">Inicio</a>
+    <h1 class="text-2xl flex items-center gap-2 text-[#493c2d] font-bold">🔭 Avistamientos de Fauna</h1>
+    <a href="/" class="float-right text-[#5b8fa9] font-bold hover:underline">Inicio</a>
 </header>
+
 <main>
-    <a href="/sightings/new" class="btn-create">➕ Nuevo avistamiento</a>
-    <table>
+    <a href="/sightings/new"
+       class="inline-block bg-[#6d8d48] text-white font-bold rounded-md px-4 py-2 my-4 hover:bg-[#56863c] transition">
+        ➕ Nuevo avistamiento
+    </a>
+
+    <table class="w-full border-collapse bg-white shadow-md rounded-xl">
         <thead>
         <tr>
-            <th>Zona</th>
-            <th>Especie</th>
-            <th>Fecha</th>
-            <th>Observador</th>
-            <th>Método</th>
-            <th>Notas</th>
-            <th>Acciones</th>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Zona</th>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Especie</th>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Fecha</th>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Observador</th>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Método</th>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Mapa</th>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Acciones</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="s : ${sightingList}">
-            <td th:text="${zoneMap[s.zoneId]}">Zona</td>
-            <td th:text="${speciesMap[s.speciesId]}">Especie</td>
-            <td th:text="${s.date}">Fecha</td>
-            <td th:text="${s.observedBy}">Observador</td>
-            <td th:text="${s.method}">Método</td>
-            <td th:text="${s.notes}">Notas</td>
-            <td class="actions">
-                <a th:href="@{'/sightings/edit/' + ${s.id}}" class="btn-action btn-edit">✏️</a>
-                <form th:action="@{'/sightings/delete/' + ${s.id}}" method="post">
-                    <button type="submit" class="btn-delete">🗑️</button>
-                </form>
+        <tr th:each="s : ${sightingList}" class="even:bg-[#e7e0c6]">
+            <td class="px-3 py-3 border text-center" th:text="${zoneMap[s.zoneId]}">Zona</td>
+            <td class="px-3 py-3 border text-center" th:text="${speciesMap[s.speciesId]}">Especie</td>
+            <td class="px-3 py-3 border text-center" th:text="${s.date}">Fecha</td>
+            <td class="px-3 py-3 border text-center" th:text="${s.observedBy}">Observador</td>
+            <td class="px-3 py-3 border text-center" th:text="${s.method}">Método</td>
+            <td class="px-3 py-3 border text-center">
+                <a href="#"
+                   class="bg-[#5b8fa9] hover:bg-[#41718a] text-white font-bold rounded-md px-3 py-1 text-sm transition"
+                   th:attr="data-map=${zoneMapUrl[s.zoneId]},data-notes=${s.notes}"
+                   onclick="openMapModal(this)">
+                    🗺️
+                </a>
+            </td>
+            <td class="px-3 py-3 border text-center">
+                <div class="flex gap-2 justify-center">
+                    <a th:href="@{'/sightings/edit/' + ${s.id}}"
+                       class="bg-[#d9863c] hover:bg-[#c66b26] text-white font-bold rounded-md px-3 py-1 text-sm transition"
+                    >✏️</a>
+                    <form th:action="@{'/sightings/delete/' + ${s.id}}" method="post" class="inline">
+                        <button type="submit"
+                                class="bg-[#c35b4e] hover:bg-[#a33e33] text-white font-bold rounded-md px-3 py-1 text-sm transition"
+                        >🗑️</button>
+                    </form>
+                </div>
             </td>
         </tr>
         </tbody>
     </table>
+
+    <!-- Backdrop y modal ocultos por defecto -->
+    <div id="backdrop" class="fixed inset-0 bg-black bg-opacity-40 z-40 hidden"></div>
+    <div id="mapModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-10 max-w-2xl w-full flex flex-col items-center">
+            <img id="mapImage" src="" alt="Mapa de zona" class="rounded-md mb-6 max-h-[32rem] object-contain w-full">
+            <figcaption id="mapNotes" class="text-sm text-[#493c2d] mb-6 text-center"></figcaption>
+            <div class="w-full flex justify-end">
+                <button onclick="closeMapModal()"
+                        class="bg-[#5b8fa9] hover:bg-[#41718a] text-white font-bold rounded-md px-6 py-2 transition">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
 </main>
-<footer>
+
+<footer class="mt-8 text-sm text-center text-[#777]">
     <p>WildTrace 🐦 2025</p>
 </footer>
+
+<script>
+    function openMapModal(el) {
+        const url = el.getAttribute("data-map");
+        const notes = el.getAttribute("data-notes") || "";
+        document.getElementById("mapImage").src = url;
+        document.getElementById("mapNotes").textContent = notes;
+        document.getElementById("mapModal").classList.remove("hidden");
+        document.getElementById("backdrop").classList.remove("hidden");
+    }
+
+    function closeMapModal() {
+        document.getElementById("mapModal").classList.add("hidden");
+        document.getElementById("backdrop").classList.add("hidden");
+        document.getElementById("mapImage").src = "";
+        document.getElementById("mapNotes").textContent = "";
+    }
+</script>
+
 </body>
 </html>
