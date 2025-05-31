@@ -49,7 +49,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     background: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 table th,
@@ -66,6 +66,12 @@ table th {
 
 table tbody tr:nth-child(even) {
     background-color: var(--table-stripe);
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
 }
 
 button,
@@ -102,6 +108,13 @@ a.btn-action {
     background-color: #56863c;
 }
 
+.btn-edit {
+    background-color: var(--accent-orange);
+}
+
+.btn-edit:hover {
+    background-color: #c66b26;
+}
 
 .btn-cancel {
     background: transparent;
@@ -117,6 +130,13 @@ a.btn-action {
     text-decoration: underline;
 }
 
+.btn-delete {
+    background-color: var(--accent-red);
+}
+
+.btn-delete:hover {
+    background-color: #a33e33;
+}
 
 footer {
     margin-top: 2rem;
@@ -129,7 +149,7 @@ footer {
     background: white;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     max-width: 800px;
     margin: 0 auto;
 }
@@ -167,6 +187,7 @@ footer {
 }
 
 
+
 .input:focus {
     outline: 2px solid var(--accent-blue);
     background: white;
@@ -175,7 +196,7 @@ footer {
 .hero-img {
     width: 100%;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     margin: 2rem 0;
 }
 
@@ -224,138 +245,9 @@ footer {
     text-decoration: underline;
 }
 
-.btn-map {
-    background-color: var(--accent-blue);
-    color: white;
-    padding: 0.4rem 0.8rem;
-    border-radius: var(--btn-radius);
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
 
-.btn-map:hover {
-    background-color: #3a6c85;
-}
 
-.btn-delete {
-    background-color: var(--accent-red);
-    color: white;
-    padding: 0.4rem 0.8rem;
-    border-radius: var(--btn-radius);
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
 
-.btn-delete:hover {
-    background-color: #a33e33;
-}
 
-.btn-edit {
-    background-color: var(--accent-orange);
-    color: white;
-    padding: 0.4rem 0.8rem;
-    border-radius: var(--btn-radius);
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
 
-.btn-edit:hover {
-    background-color: #c66b26;
-}
-
-.modal-backdrop {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 999;
-}
-
-.modal-map {
-    display: none;
-    position: fixed;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    border: 1px solid #ccc;
-    padding: 1rem;
-    z-index: 1000;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    max-width: 800px;
-}
-
-.modal-map-image {
-    max-width: 100%;
-    border-radius: 6px;
-}
-
-.modal-map-footer {
-    text-align: right;
-    margin-top: 0.5rem;
-}
-.rounded-table {
-    border-collapse: separate;
-    border-spacing: 0;
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.rounded-table th {
-    background-color: var(--accent-green);
-    color: white;
-    padding: 0.75rem;
-    text-align: center;
-}
-
-.rounded-table td {
-    padding: 0.75rem;
-    text-align: center;
-    background-color: white;
-    border-top: 1px solid #ddd;
-    vertical-align: middle;
-}
-
-.rounded-table tbody tr:nth-child(even) td {
-    background-color: var(--table-stripe);
-}
-
-.rounded-table thead th:first-child {
-    border-top-left-radius: 8px;
-}
-
-.rounded-table thead th:last-child {
-    border-top-right-radius: 8px;
-}
-
-.rounded-table tbody tr:last-child td {
-    border-bottom: 1px solid #ddd;
-}
-
-.rounded-table tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 8px;
-}
-
-.rounded-table tbody tr:last-child td:last-child {
-    border-bottom-right-radius: 8px;
-}
-
-.actions {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    align-items: center;
-}
-
-.actions form {
-    display: inline;
-    margin: 0;
-}
 

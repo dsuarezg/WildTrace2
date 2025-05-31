@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${action == 'edit'} ? 'Editar avistamiento' : 'Nuevo avistamiento'">Formulario Avistamiento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#f7f0dc] text-[#333] font-sans max-w-[900px] mx-auto p-8">
+
+<header>
+    <h1 class="text-2xl flex items-center gap-2 text-[#493c2d] font-bold text-center justify-center"
+        th:text="${action == 'edit'} ? '✏️ Editar Avistamiento' : '🆕 Nuevo Avistamiento'">Formulario</h1>
+    <div class="flex justify-end mt-2">
+        <a href="/sightings" class="hover:underline group flex items-center gap-1 text-[#493c2d] font-bold">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 16 16"
+                 class="inline align-middle transition-transform duration-200 group-hover:-translate-x-1 group-hover:scale-110 group-hover:drop-shadow"
+                 style="stroke: #493c2d;">
+                <path d="M11 2 5 8l6 6" stroke="#493c2d" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            Volver al listado
+        </a>
+    </div>
+</header>
+
+<main class="flex justify-center mt-8">
+    <form th:action="${action == 'edit'} ? @{'/sightings/update/' + ${sightingId}} : @{/sightings/create}"
+          method="post" th:object="${sighting}"
+          class="bg-white shadow-md rounded-xl p-8 w-full max-w-xl space-y-6">
+
+        <div>
+            <label for="zoneId" class="block font-semibold mb-1">Zona</label>
+            <select id="zoneId" th:field="*{zoneId}" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6d8d48]">
+                <option th:each="zone : ${zoneList}" th:value="${zone.zoneId}" th:text="${zone.zoneName}">Zona</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="speciesId" class="block font-semibold mb-1">Especie</label>
+            <select id="speciesId" th:field="*{speciesId}" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6d8d48]">
+                <option th:each="sp : ${speciesList}" th:value="${sp.id}" th:text="${sp.commonName}">Especie</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="date" class="block font-semibold mb-1">Fecha</label>
+            <input type="date" id="date" th:field="*{date}" required
+                   class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6d8d48]">
+        </div>
+
+        <div>
+            <label for="observedBy" class="block font-semibold mb-1">Observador</label>
+            <input type="text" id="observedBy" th:field="*{observedBy}" required
+                   class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6d8d48]">
+        </div>
+
+        <div>
+            <label for="method" class="block font-semibold mb-1">Método</label>
+            <input type="text" id="method" th:field="*{method}"
+                   class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6d8d48]">
+        </div>
+
+        <div>
+            <label for="notes" class="block font-semibold mb-1">Notas</label>
+            <textarea id="notes" th:field="*{notes}"
+                      class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6d8d48]"></textarea>
+        </div>
+
+        <div class="flex justify-end">
+            <button type="submit"
+                    class="bg-[#6d8d48] hover:bg-[#56863c] text-white font-bold rounded-md px-6 py-2 transition"
+                    th:text="${action == 'edit'} ? 'Actualizar' : 'Crear'">
+                Guardar
+            </button>
+        </div>
+    </form>
+</main>
+
+<footer class="mt-8 text-sm text-center text-[#777]">
+    <p>WildTrace 🐾 2025</p>
+</footer>
+</body>
+</html>

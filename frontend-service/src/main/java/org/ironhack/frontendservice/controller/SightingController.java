@@ -16,12 +16,12 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/sightings")
+@RequestMapping(“/sightings”)
 public class SightingController {
 
     private final RestTemplate restTemplate;
 
-    @Value("${wildtrace.gateway.base-url}")
+    @Value(“${wildtrace.gateway.base-url}”)
     private String gatewayBaseUrl;
 
     public SightingController(RestTemplate restTemplate) {

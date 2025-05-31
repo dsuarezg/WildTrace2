@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WildTrace – Inicio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-[#f7f0dc] text-[#333] font-sans min-h-screen flex flex-col">
+
+<header class="index-header text-center mt-12 mb-8">
+    <h1 class="text-3xl font-bold flex items-center justify-center gap-2">
+        🐾
+        <span class="text-white bg-[#6d8d48] px-2 py-1 rounded-md" style="line-height:2.2rem;">
+            WildTrace
+        </span>
+    </h1>
+    <p class="mt-2 text-lg text-[#493c2d]">Gestión de biodiversidad en zonas naturalizadas</p>
+</header>
+
+<main class="flex-1 flex flex-col items-center" x-data="{ showExplora: false }">
+
+    <img src="/banner.png" alt="WildTrace banner"
+         class="hero-img rounded-2xl shadow-2xl max-w-full w-[800px] object-cover mb-12 transition-transform duration-300"
+         :class="showExplora ? 'cursor-default' : 'hover:scale-105 cursor-pointer'"
+         @click="showExplora = true">
+
+    <section class="index-links mt-2" x-show="showExplora" x-transition>
+        <h2 class="text-xl font-bold mb-4">Explora:</h2>
+        <ul class="space-y-2 text-lg">
+            <li>
+                <a th:href="@{/species}" class="hover:underline font-semibold">
+                    📘 Catálogo de Especies
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/zones}" class="hover:underline font-semibold">
+                    🗺️ Zonas Naturalizadas
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/sightings}" class="hover:underline font-semibold">
+                    🔭 Avistamientos
+                </a>
+            </li>
+        </ul>
+    </section>
+</main>
+
+<footer class="mt-12 mb-12 text-sm text-center text-[#777]">
+    <p>Desarrollado como parte del proyecto <strong>WildTrace</strong> 🐾</p>
+</footer>
+
+</body>
+</html>

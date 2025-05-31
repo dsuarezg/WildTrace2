@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${zoneId != null ? 'Editar zona' : 'Nueva zona'}">Formulario zona</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#f7f0dc] text-[#333] font-sans max-w-[900px] mx-auto p-8">
+
+<header>
+  <h1 class="text-2xl flex items-center gap-2 text-[#493c2d] font-bold text-center justify-center"
+      th:text="${zoneId != null ? '✏️ Editar zona' : '🆕 Nueva zona'}">Formulario zona</h1>
+  <div class="flex justify-end mt-2">
+    <a href="/zones" class="hover:underline group flex items-center gap-1 text-[#493c2d] font-bold">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 16 16"
+           class="inline align-middle transition-transform duration-200 group-hover:-translate-x-1 group-hover:scale-110 group-hover:drop-shadow"
+           style="stroke: #493c2d;">
+        <path d="M11 2 5 8l6 6" stroke="#493c2d" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      Volver al listado
+    </a>
+  </div>
+</header>
+
+<main class="flex justify-center mt-8">
+  <form th:action="${zoneId != null ? '/zones/update/' + zoneId : '/zones/create'}"
+        method="post" th:object="${zone}"
+        class="bg-white shadow-md rounded-xl p-8 w-full max-w-xl space-y-6">
+
+    <div th:if="${zoneId != null}">
+      <label class="block font-semibold mb-1">ID</label>
+      <input type="text" th:value="${zoneId}" disabled
+             class="w-full border rounded-md px-3 py-2 bg-gray-100 text-gray-500 cursor-not-allowed">
+    </div>
+
+    <div>
+      <label for="zoneName" class="block font-semibold mb-1">Nombre de la zona</label>
+      <input type="text" id="zoneName" th:field="*{zoneName}" required
+             class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6d8d48]">
+    </div>
+
+    <div>
+      <label for="latitude" class="block font-semibold mb-1">Latitud</label>
+      <input type="number" step="0.0001" id="latitude" th:field="*{latitude}" required
+             class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6d8d48]">
+    </div>
+
+    <div>
+      <label for="longitude" class="block font-semibold mb-1">Longitud</label>
+      <input type="number" step="0.0001" id="longitude" th:field="*{longitude}" required
+             class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6d8d48]">
+    </div>
+
+    <div class="flex justify-end">
+      <button type="submit"
+              class="bg-[#6d8d48] hover:bg-[#56863c] text-white font-bold rounded-md px-6 py-2 transition"
+              th:text="${zoneId != null ? 'Actualizar' : 'Crear'}">
+        Guardar
+      </button>
+    </div>
+  </form>
+</main>
+
+<footer class="mt-8 text-sm text-center text-[#777]">
+  <p>WildTrace 🐾 2025</p>
+</footer>
+</body>
+</html>

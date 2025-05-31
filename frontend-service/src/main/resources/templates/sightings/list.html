@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>🔭 Avistamientos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#f7f0dc] text-[#333] font-sans max-w-[900px] mx-auto p-8">
+
+<header class="flex mb-10 justify-between items-center">
+    <h1 class="text-2xl flex items-center gap-2 text-[#493c2d] font-bold">🔭 Avistamientos de Fauna</h1>
+    <div class="flex justify-end mt-2">
+        <a href="/" class="hover:underline group flex items-center gap-1 text-[#493c2d] font-bold">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 16 16"
+                 class="inline align-middle transition-transform duration-200 group-hover:-translate-x-1 group-hover:scale-110 group-hover:drop-shadow"
+                 style="stroke: #493c2d;">
+                <path d="M11 2 5 8l6 6" stroke="#493c2d" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            Volver al Inicio
+        </a>
+    </div>
+</header>
+
+<main>
+
+
+    <table class="w-full border-collapse bg-white shadow-md rounded-xl">
+        <thead>
+        <tr>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Zona</th>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Especie</th>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Fecha</th>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Observador</th>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Método</th>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Mapa</th>
+            <th class="bg-[#6d8d48] text-white px-3 py-3 border text-center">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="s : ${sightingList}" class="even:bg-[#e7e0c6]">
+            <td class="px-3 py-3 border text-center" th:text="${zoneMap[s.zoneId]}">Zona</td>
+            <td class="px-3 py-3 border text-center" th:text="${speciesMap[s.speciesId]}">Especie</td>
+            <td class="px-3 py-3 border text-center" th:text="${s.date}">Fecha</td>
+            <td class="px-3 py-3 border text-center" th:text="${s.observedBy}">Observador</td>
+            <td class="px-3 py-3 border text-center" th:text="${s.method}">Método</td>
+            <td class="px-3 py-3 border text-center">
+                <div class="flex justify-center">
+                    <a href="#"
+                       class="p-1 transition group"
+                       th:attr="data-map=${zoneMapUrl[s.zoneId]},data-notes=${s.notes}"
+                       onclick="openMapModal(this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#5b8fa9"
+                             viewBox="0 0 16 16"
+                             class="bi bi-globe-europe-africa-fill group-hover:scale-110 group-hover:drop-shadow group-hover:fill-[#41718a] transition">
+                            <path fill-rule="evenodd" d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0m0 1a6.97 6.97 0 0 0-4.335 1.505l-.285.641a.847.847 0 0 0 1.48.816l.244-.368a.81.81 0 0 1 1.035-.275.81.81 0 0 0 .722 0l.262-.13a1 1 0 0 1 .775-.05l.984.34q.118.04.243.054c.784.093.855.377.694.801a.84.84 0 0 1-1.035.487l-.01-.003C8.273 4.663 7.747 4.5 6 4.5 4.8 4.5 3.5 5.62 3.5 7c0 3 1.935 1.89 3 3 1.146 1.194-1 4 2 4 1.75 0 3-3.5 3-4.5 0-.704 1.5-1 1-2.5-.097-.291-.396-.568-.642-.756-.173-.133-.206-.396-.051-.55a.334.334 0 0 1 .42-.043l1.085.724a.276.276 0 0 0 .348-.035c.15-.15.414-.083.488.117.16.428.445 1.046.847 1.354A7 7 0 0 0 8 1"/>
+                        </svg>
+                    </a>
+                </div>
+            </td>
+            <td class="px-3 py-3 border text-center">
+                <div class="flex gap-2 justify-center">
+                    <a th:href="@{'/sightings/edit/' + ${s.id}}"
+                       class="p-1 transition group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#d9863c"
+                             viewBox="0 0 16 16"
+                             class="bi bi-pencil-square group-hover:scale-110 group-hover:drop-shadow group-hover:fill-[#c66b26] transition">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                        </svg>
+                    </a>
+                    <form th:action="@{'/sightings/delete/' + ${s.id}}" method="post" class="inline"
+                          onsubmit="return confirm('¿Seguro que deseas eliminar este avistamiento?');">
+                        <button type="submit" class="p-1 transition group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#c35b4e"
+                                 viewBox="0 0 16 16"
+                                 class="bi bi-trash3-fill group-hover:scale-110 group-hover:drop-shadow group-hover:fill-[#a33e33] transition">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                            </svg>
+                        </button>
+                    </form>
+
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="flex justify-end mt-4">
+        <a href="/sightings/new"
+           class="inline-block bg-[#6d8d48] text-white font-bold rounded-md px-4 py-2 hover:bg-[#56863c] transition">
+            ➕ Nuevo avistamiento
+        </a>
+    </div>
+
+    <div id="backdrop" class="fixed inset-0 bg-black bg-opacity-40 z-40 hidden"></div>
+    <div id="mapModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-10 max-w-2xl w-full flex flex-col items-center">
+            <img id="mapImage" src="" alt="Mapa de zona" class="rounded-md mb-6 max-h-[32rem] object-contain w-full">
+            <figcaption id="mapNotes" class="text-sm text-[#493c2d] mb-6 text-center"></figcaption>
+            <div class="w-full flex justify-end">
+                <button onclick="closeMapModal()"
+                        class="bg-[#5b8fa9] hover:bg-[#41718a] text-white font-bold rounded-md px-6 py-2 transition">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="mt-8 text-sm text-center text-[#777]">
+    <p>WildTrace 🐾 2025</p>
+</footer>
+
+<script>
+    function openMapModal(el) {
+        const url = el.getAttribute("data-map");
+        const notes = el.getAttribute("data-notes") || "";
+        document.getElementById("mapImage").src = url;
+        document.getElementById("mapNotes").textContent = notes;
+        document.getElementById("mapModal").classList.remove("hidden");
+        document.getElementById("backdrop").classList.remove("hidden");
+    }
+
+    function closeMapModal() {
+        document.getElementById("mapModal").classList.add("hidden");
+        document.getElementById("backdrop").classList.add("hidden");
+        document.getElementById("mapImage").src = "";
+        document.getElementById("mapNotes").textContent = "";
+    }
+</script>
+
+</body>
+</html>
