@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sobre mí – WildTrace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#f7f0dc] text-[#333] font-sans min-h-screen flex flex-col">
+
+<header class="index-header text-center mt-5 mb-8">
+    <h1 class="text-3xl font-bold flex flex-col items-center justify-center gap-2">
+        <img th:src="@{/img.png}" alt="About Me"
+             class="hero-img rounded-2xl shadow-2xl max-w-full w-[300px] object-cover mb-8">
+        <a href="/" class="transition duration-200 hover:brightness-110">
+            <span class="text-white bg-[#6d8d48] px-3 py-1 rounded-md" style="line-height:2.2rem;">
+                Sobre mí
+            </span>
+        </a>
+    </h1>
+</header>
+
+<main class="flex-1 flex flex-col items-center px-6">
+
+    <section class="bg-white shadow-lg rounded-xl p-8 max-w-3xl text-[#493c2d] leading-relaxed text-lg">
+
+        <h2 class="text-2xl font-bold mb-4 text-[#6d8d48]">👨‍💻 ¿Quién soy?</h2>
+        <p>
+            Soy <strong>Daniel Suárez</strong>, desarrollador backend, Ingeniero Informático y Documentalista de formación con experiencia en desarrollo de aplicaciones web, móviles mediante distintas tecnologías.
+        </p>
+
+        <p class="mt-4">
+            Este proyecto nace de mi interés por crear herramientas tecnológicas útiles, robustas y reutilizables, capaces de integrarse con servicios reales, más allá de un simple como ejercicio académico.
+        </p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-[#6d8d48]">🎯 ¿Qué objetivos perseguía con WildTrace?</h2>
+        <ul class="list-disc list-inside space-y-2">
+            <li>Profundizar en microservicios con Spring Cloud y Eureka.</li>
+            <li>Validación, pruebas y documentación avanzada con Swagger y JaCoCo.</li>
+            <li>Aplicar buenas prácticas (Clean Code, SOLID, FIRST, etc.).</li>
+            <li>Diseñar una interfaz accesible con Thymeleaf y un estilo consistente pero sencillo.</li>
+        </ul>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-[#6d8d48]">🌱 Conclusión</h2>
+        <p>
+            Considero que la tecnología debe tener propósito. WildTrace no solo me ha permitido demostrar mis habilidades técnicas, sino también alinearlas con una causa: la conservación de la biodiversidad.
+        </p>
+
+    </section>
+
+    <div class="flex justify-end mt-10">
+        <a href="/" class="hover:underline group flex items-center gap-1 text-[#493c2d] font-bold">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 16 16"
+                 class="inline align-middle transition-transform duration-200 group-hover:-translate-x-1 group-hover:scale-110 group-hover:drop-shadow"
+                 style="stroke: #493c2d;">
+                <path d="M11 2 5 8l6 6" stroke="#493c2d" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            Volver al inicio
+        </a>
+    </div>
+</main>
+
+<footer class="mt-12 mb-8 text-sm text-center text-[#777]">
+    <p>Desarrollado con ❤️ como parte del proyecto <strong>WildTrace</strong></p>
+</footer>
+
+</body>
+</html>

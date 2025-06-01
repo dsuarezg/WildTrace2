@@ -11,9 +11,11 @@
 <header class="index-header text-center mt-12 mb-8">
     <h1 class="text-3xl font-bold flex items-center justify-center gap-2">
         🐾
+        <a href="/" class="transition duration-200 hover:brightness-110">
         <span class="text-white bg-[#6d8d48] px-2 py-1 rounded-md" style="line-height:2.2rem;">
             WildTrace
         </span>
+        </a>
     </h1>
     <p class="mt-2 text-lg text-[#493c2d]">Gestión de biodiversidad en zonas naturalizadas</p>
 </header>
@@ -24,6 +26,27 @@
          class="hero-img rounded-2xl shadow-2xl max-w-full w-[800px] object-cover mb-12 transition-transform duration-300"
          :class="showExplora ? 'cursor-default' : 'hover:scale-105 cursor-pointer'"
          @click="showExplora = true">
+
+    <section class="max-w-3xl text-justify text-lg leading-relaxed px-6 mb-8 text-[#493c2d]"
+             x-show="!showExplora" x-transition>
+
+        <p>
+            WildTrace es un sistema distribuido basado en microservicios, diseñado para registrar y visualizar avistamientos de fauna en zonas naturalizadas o de interés.
+        </p>
+        <p class="mt-5">
+            Cada avistamiento queda registrado como una combinación única de especie, zona geográfica y fecha, incluyendo detalles del observador y el método utilizado.
+        </p>
+        <p class="mt-5">
+            Debido al carácter del proyecto, su enfoque no es solo académico o demostrativo, sino que también busca ofrecer una base sólida y reutilizable.
+        </p>
+        <p class="mt-5">
+            Gracias a su arquitectura desacoplada y modular, los microservicios pueden integrarse fácilmente con otras plataformas, incluyendo sistemas públicos o iniciativas medioambientales.
+        </p>
+        <p class="mt-5">
+            Esto permitiría, por ejemplo, apoyar tareas de seguimiento en situaciones de emergencia como incendios forestales, catástrofes naturales o planes de recuperación de hábitats.
+        </p>
+
+    </section>
 
     <section class="index-links mt-2" x-show="showExplora" x-transition>
         <h2 class="text-xl font-bold mb-4">Explora:</h2>
@@ -47,9 +70,16 @@
     </section>
 </main>
 
+
 <footer class="mt-12 mb-12 text-sm text-center text-[#777]">
-    <p>Desarrollado como parte del proyecto <strong>WildTrace</strong> 🐾</p>
+    <p>
+        Desarrollado como parte del proyecto
+        <a th:href="@{/about/me}" class="font-semibold text-[#493c2d] hover:underline">
+            <strong>WildTrace</strong>
+        </a> 🐾
+    </p>
 </footer>
+
 
 </body>
 </html>
