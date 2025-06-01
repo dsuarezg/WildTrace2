@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/about")
 public class AboutController {
 
+    /****
+     * Handles HTTP GET requests to "/about/me" and returns the view name for the "about me" page.
+     *
+     * @return the logical view name "about/me"
+     */
     @GetMapping("/me")
     public String aboutMe() {
         return "about/me";
